@@ -1,0 +1,40 @@
+PROBLEM: Perfect Substring - Number of substrings with count of each character as k
+A string is comprised of digits from 0 to 9 contains a perfect substring if all the elements within a substring occur exactly k times. Calculate the number of perfect substrings in s.
+Example:
+S = 1102021222
+k = 2
+The 6 perfect substrings are:
+S[0:1] = 11
+S[0:5] = 110202
+S[1:6] = 102021
+S[2:5] = 0202
+S[7:8] = 22
+S[8:9] = 22
+
+SOLUTION
+
+
+
+/* O(n^2) SOLUTION TLE */
+int perfectSubstring(string s, int k){
+    int ans=0;
+        for(int i=0;i<s.length();i++){
+            for(int j=i+1;j<=s.length();j++){
+                String t=s.substring(i,j);
+                if(t.length()<k || t.length()%k!=0) continue;
+                int count[] = new int[10];
+                for(int l=0;l<t.length();l++){
+                    count[t.charAt(l)-'0']++;
+                }
+                int cnt=0;
+                for(int c=0;c<10;c++){
+                    if(count[c]==k) cnt++;
+                }
+                if(cnt==t.length()/k) ans++;
+            }
+        }
+    return ans;
+}
+
+LOGIC--- Make each substring and check the condition using hashing.
+Gives TLE.
