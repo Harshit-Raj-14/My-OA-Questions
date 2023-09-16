@@ -38,3 +38,20 @@ int perfectSubstring(string s, int k){
 
 LOGIC--- Make each substring and check the condition using hashing.
 Gives TLE.
+
+
+
+
+
+
+
+
+
+
+
+VARIATION OF SAME QUESTION
+Count Of Substrings With Exactly K Unique Characters
+https://www.pepcoding.com/resources/data-structures-and-algorithms-in-java-levelup/hashmap-and-heaps/count-of-substrings-with-exactly-k-unique-characters-official/ojquestion
+
+Count M-length substrings occurring exactly K times in a string
+https://www.tutorialspoint.com/count-m-length-substrings-occurring-exactly-k-times-in-a-string
