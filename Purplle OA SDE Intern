@@ -1,0 +1,57 @@
+5 mcq's
+-> Longest common subsequence -> tell misisng step in code
+-> TC of removing nad adding last element in linked list
+
+
+2 Coding Questions
+
+CODING QUESTION 1 : SOLVED
+-> Tell whether 3 strings are anagram or not (easy) (hashing+count frequency compare) 
+
+
+CODING QUESTION 2 (NOT ABLE TO SOLVE)
+-> Maximum Product Subarray (Hard, Advanced level)
+Same question-https://discuss.codechef.com/t/why-is-this-problem-hard/104301
+
+Question:
+Determine the maximum subsequence product that can be formed from the elements of this array. 
+Moreover, any pair of index i and index j is present in the same subsequence if and only if their product i*j is a perfect square.
+Since the answer can be large, output the answer with modulo 10^9 + 7.
+
+SOLUTION FORM NET
+Try to work out the 2 rules you can find here:
+(Note: this table shows which indices j can be if i is fixed)
+
+Subsequence 1: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, ...
+Subsequence 2: -  2, -   8,  -  18,  -  32,  -   50,   -   72,   -   98,   -  ...
+Subsequence 3: -  -  3,  -   -  12,  -   -  27,   -    -   48,   -    -   75  ...
+Subsequence 4: -  1, -   4,  -   9,  -  16,  -   25,   -   36,   -   49,   -  ...
+Subsequence 5: -  -  -   -   5,  -   -   -   -   20,   -    -    -    -   45, ...
+Subsequence 6: -  -  -   -   -   6,  -   -   -    -    -   24,   -    -    -  ...
+Subsequence 7: -  -  -   -   -   -   7,  -   -    -    -    -    -   28,   -  ...
+Subsequence 8: -  -  -   2,  -   -   -   8,  -    -    -   18,   -    -    -  ...
+Subsequence 9: -  -  1,  -   -   4,   -   -   9,   -    -  16,   -    -    25 ...
+
+
+logic should be understandable by looking at the table.
+Subsequence 1: every perfect square can be the product of i * j. 
+Subsequence 5: every 5th perfect square can be the product of i * j. 
+....
+Subsequence n: every nth perfect square can be the product of i * j.
+
+Talking about, subsequences that are irrelevant:
+Subsequence 4: -  1, -   4,  -   9,  -  16,  -   25,   -   36,   -   49,   -  ...
+Subsequence 8: -  -  -   2,  -   -   -   8,  -    -    -   18,   -    -    -  ...
+Subsequence 9: -  -  1,  -   -   4,   -   -   9,   -    -  16,   -    -    25 ...
+
+(these subsequences can be ignored, they are sub-subsequences of those above. 4 is a copy of subsequence 1. 8 is a copy of subsequence 2. 9 is a copy of subsequence 1 and so on.
+I did not test it, but I would assume a subsequence is irrelevant, if the number (in this case 4, 8 or 9) is part of another subsequence that comes before. 4 is is the 2nd number in subsequence 1. 8 is the 2nd number in subsequence 2. 9 is the 3rd number in subsequence 1.)
+)
+My approach:
+
+    create an array that contains the N perfect squares
+    create a set that contains all dupes
+    for i = 1 to N:
+    → if i isElement of set: continue
+    → else: fully calculate the ith subsequence and add each element to the set
+    calculate solution with the help of all sets
