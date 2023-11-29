@@ -1,0 +1,73 @@
+NOTES
+A lambda function is a small anonymous function.
+A lambda function can take any number of arguments, but can only have one expression.
+s = lambda q: q * 3
+x = 2
+x = s(x)
+o/p: 6
+
+// -> round soff (don t think of it becoming integer it just drops the remainder or the floating part) eg: 4.5//2=2.0
+/ -> does not round off
+
+In Python, AND operator has higher precedence than OR operator.
+In Python the precedence order is first NOT then AND and in last OR.
+
+
+
+
+
+
+
+
+
+/* Input array */
+n= int(input())
+arr=[]
+for i in range(n):
+    arr.append(int(input()))
+    
+print(arr)
+
+
+/* count the freq of char in a string */
+def func(str):
+    count = {}  # Initialize an empty dictionary to store character frequencies
+    for i in str:
+        count[i] = count.get(i, 0) + 1
+    return count
+
+str = "helloworld"
+result = func(str)
+for i, count in result.items():
+    print(i,"=",count)
+
+
+
+
+
+PREDICT OUTPUTS
+
+class Acc: 
+    def __init__(self, id): 
+        self.id = id
+        id = 555 
+  
+acc = Acc(111) 
+print (acc.id) 
+OUTPUT---111
+Reason: You then have a local variable id within the __init__ method, and you set its value to 555. Note that this local variable is different from the instance variable self.id.
+
+
+
+s1={3, 4}
+s2={1, 2}
+s3=set()
+i=0
+j=0
+for i in s1:
+	for j in s2:
+		s3.add((i,j))
+		i+=1
+		j+=1
+print(s3)
+OUTPUT - (3,1), (4,2) (4,1) (5,2)
