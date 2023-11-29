@@ -13,6 +13,10 @@ In Python, AND operator has higher precedence than OR operator.
 In Python the precedence order is first NOT then AND and in last OR.
 
 
+nameList = ['Harsh', 'Pratik', 'Bob', 'Dhruv']  
+print nameList[1][-1] 
+o/p: k
+The index position -1 represents either the last element in a list or the last character in a String.
 
 
 
