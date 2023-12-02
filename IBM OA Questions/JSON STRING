@@ -1,0 +1,113 @@
+QUESTION:
+Implement a simple prototype service to find the difference between two JSON (JavaScript Object Notation) objects.
+To keep the prototype simple, a JSON will contain only key-value pairs and no nested objects or arrays in it. Given two JSON strings, json 1 and json2, find the list of keys for which the values are different. If a key is present in only one of the JSONS, it should not be considered in the result. The list of keys should be sorted in lexicographically ascending order.
+Example:
+Suppose json1 = "{"hello":"world", "hi":"hello","you":"me"}" and json2= "{"hello":"world","hi":"helloo","you":"me"}"
+The only common key where the values differ is "hi". Hence the answer is ["hi"].
+Function Description
+Complete the function getJSONDiff in the editor below.
+getJSONDiff has the following parameter(s):
+json1: the first JSON string
+json2: the second JSON string
+Returns
+string[]: a sorted list of keys that have different associated values in the two JSONS.
+
+
+SOLUTION:
+import json
+
+def getJSONDiff(json1, json2):
+    # Parse JSON strings into dictionaries
+    dict1 = json.loads(json1)
+    dict2 = json.loads(json2)
+
+    # Get the common keys
+    common_keys = set(dict1.keys()) & set(dict2.keys())
+
+    # Find keys with different values
+    different_keys = [key for key in common_keys if dict1[key] != dict2[key]]
+
+    # Sort the result lexicographically
+    different_keys.sort()
+
+    return different_keys
+
+# Example usage
+json1 = '{"hacker":"rank", "input":"output"}'
+json2 = '{"hacker":"ranked", "input":"wrong"}'
+
+result = getJSONDiff(json1, json2)
+print(result)
+
+
+
+
+
+
+
+
+
+
+
+/* SOLUTION WIHT TAKING INPUT */
+import json
+
+def getJSONDiff(json1, json2):
+    # Parse JSON strings into dictionaries
+    dict1 = json.loads(json1)
+    dict2 = json.loads(json2)
+
+    # Get the common keys
+    common_keys = set(dict1.keys()) & set(dict2.keys())
+
+    # Find keys with different values
+    different_keys = [key for key in common_keys if dict1[key] != dict2[key]]
+
+    # Sort the result lexicographically
+    different_keys.sort()
+
+    return different_keys
+
+# Take user input for the two JSON strings
+json1 = input()
+json2 = input()
+
+# Call the function and display the result
+result = getJSONDiff(json1, json2)
+print(result)
+
+
+
+
+
+
+/* A WORKING COPIED SOLUTION */
+import os
+
+def getJSONDiff(json1, json2):
+    json1_dict = eval(json1)
+    json2_dict = eval(json2)
+    different_keys = []
+
+    for key in json1_dict:
+        if key in json2_dict and json1_dict[key] != json2_dict[key]:
+            different_keys.append(key)
+
+    different_keys.sort()
+    return different_keys
+
+if __name__ == "__main__":
+    output_path = os.environ.get('OUTPUT_PATH', 'w')
+    
+    with open(output_path, 'w') as fptr:
+        json1 = input()
+        json2 = input()
+
+        result = getJSONDiff(json1, json2)
+        fptr.write('\n'.join(result))
+        fptr.write('\n')
+        fptr.close()
+
+
+
+
