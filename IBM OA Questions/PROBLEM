@@ -1,0 +1,22 @@
+QUESTION:
+
+Given the three integers, x, y, and z, convert x to y by repeatedly performing these operations: adding 1 to x or subtracting 1 from x. A maximum of z operations can be performed to reach y, and, if necessary, all operations may be the same. As the operations are applied, keep track of the maximum value that x achieves. The goal is to create the highest possible value of x somewhere along the way while arriving at the target value within z operations.
+Example
+X=4
+y=4
+Z=4
+The maximum achievable value of x is 6. Because a maximum of 4 moves are available, 1 can be added twice and subtracted twice to arrive back at 4. Performing 0 or 2 moves would still arrive at the target value but would have maxima of 4 and 5, respectively.
+Function Description
+Complete the function findMaxNum in the editor below.
+findMaxNum has the following parameter(s):
+int x: the starting value
+int y: the target value
+int z: the maximum number of steps
+Returns:
+int: the maximum integer which can be made from xwhile converting x to yin at most z steps; if x cannot be converted to yafter at most z steps, return -1
+
+
+
+
+
+
