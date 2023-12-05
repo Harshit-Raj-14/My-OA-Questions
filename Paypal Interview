@@ -1,0 +1,57 @@
+Learn about SQL ROW partition -> could not answer
+
+Questions)
+Central Limit Theorem
+
+importance of data Feature
+
+SQL queries
+table - monthly income
+rows -> name, date, amount
+
+SELECT * FROM Monthly_Spent WHERE name=’Megha’;
+
+SELECT Name, SUM(amount) FROM Monthly_Spent GROUP BY name HAVING name=’Megha’;
+
+SELECT Name, MAX(amount) FROM Monthly_Spent GROUP BY name;
+
+SELECT Name, date, MAX(amount) FROM monthly_spent GROUP BY name, date;
+
+Customer
+Name, c_id
+
+O/p-> name, customer, id total amount
+
+SELECT 
+monthly_spent.name, customer.c_id, monthly_spent.SUM(amount) 
+FROM Monthly_Spent
+INNER JOIN
+customer
+ON monthlyspent.name=customer.name
+GROUP BY monthly_spent.name;
+
+
+
+
+PROBABILITY
+1 equilateral triangle, 1 ant on each vertex. moves find probability they collide
+
+ABC
+3 ants -> 2 direction(side)
+2^3 ways to move = 8
+
+2 ways -> they cannot collide -> when they all move in same direction
+6 cases -> collision
+
+P(collision) = 6/8
+
+https://www.geeksforgeeks.org/puzzle-21-3-ants-and-triangle/
+
+
+
+1 deck, 2 pull cards, find probability of same color
+2 x (26/52 x 25/52)
+
+
+
+
