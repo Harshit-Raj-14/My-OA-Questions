@@ -12,3 +12,46 @@ What is kubernetes
 What is docker image
 What is CV's in kubernetes
 What is microservices
+
+
+PRINT 1 TO 100 WITHOUT LOOP
+import java.util.*;
+public class PrintNumbersWithOutLoop {
+    static void printNumbers(int number){
+        if(number<=0) return;  //base case
+        //else make a recursive call
+        printNumbers(number-1);
+        //print number in tail recursive
+        System.out.print(number + " ");
+    }
+
+    public static void main(String[] args) {
+        int n = 100;
+        printNumbers(n);
+    }
+}
+
+
+
+
+
+PROBLEM : 1 to N without loop
+/* RECURSION */
+public class Solution {
+    static int[] recurs(int n, int[] arr){
+        if(n<=0) return arr;
+        int i=n-1;
+        arr[i]=n;
+        return recurs(n-1, arr);
+    }
+
+    public static int[] printNos(int x) {
+        int[] arr = new int[x];
+        return recurs(x, arr);
+    }
+}
+
+/*
+TC: O( n )
+SC: O( n )
+*/
