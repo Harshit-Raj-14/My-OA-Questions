@@ -14,6 +14,14 @@ What is CV's in kubernetes
 What is microservices
 
 
+
+IPV 4 vs IPV 6
+Computers on the internet talk to each other through IP addresses, so understanding IP address is important. 
+IP addresses are of two types: IPv4 and IPv6. IPv4 addresses are 32-bit addresses having four octets with numbers 0 to 255, providing more than 4 billion IP addresses. 
+However, 4 billion IPs are still not enough for the 8 billion people living on planet Earth. Therefore, IPv6 was invented. 
+IPv6 addresses are 128-bit addresses that provide around 340 undecillion IP addresses and come with additional features.
+
+
 PRINT 1 TO 100 WITHOUT LOOP
 import java.util.*;
 public class PrintNumbersWithOutLoop {
