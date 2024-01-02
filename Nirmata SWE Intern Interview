@@ -14,6 +14,18 @@ What is CV's in kubernetes
 What is microservices
 
 
+SECOND ROUND------------------------
+DSA---
+Problem : If you have 10 sorted arrays, how you will make one single sorted array.
+Problem : If you have a very big array, find out the 1000 largest numbers.
+What is CVE's in kubernetes
+
+What is LRU cahce
+Problem : Write full implementation of LRU cache. - https://leetcode.com/problems/lru-cache/
+
+https://leetcode.com/problems/reverse-words-in-a-string/description/
+
+
 
 IPV 4 vs IPV 6
 Computers on the internet talk to each other through IP addresses, so understanding IP address is important. 
@@ -41,8 +53,6 @@ public class PrintNumbersWithOutLoop {
 
 
 
-
-
 PROBLEM : 1 to N without loop
 /* RECURSION */
 public class Solution {
@@ -63,3 +73,13 @@ public class Solution {
 TC: O( n )
 SC: O( n )
 */
+
+
+
+
+
+
+
+
+
+
