@@ -16,7 +16,7 @@ What is microservices
 
 SECOND ROUND------------------------
 DSA---
-Problem : If you have 10 sorted arrays, how you will make one single sorted array.
+Problem : If you have 10 sorted arrays, how you will make one single sorted array. -> https://www.geeksforgeeks.org/merge-k-sorted-arrays/
 Problem : If you have a very big array, find out the 1000 largest numbers.
 What is CVE's in kubernetes
 
