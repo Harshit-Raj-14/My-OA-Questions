@@ -27,6 +27,20 @@ https://leetcode.com/problems/reverse-words-in-a-string/description/
 
 
 
+THIRD ROUND--------------------------------------------
+DSA--
+Porblem - pow(x,n) - https://leetcode.com/problems/powx-n/
+
+SQL ->
+you have a table student - > with columns name, subject, marks. 
+There can be multiple subjects along with their marks. Find how many students names who have total marks in all subject more than 500. 
+SELECT name, SUM(marks) as total_marks
+FROM student
+GROUP BY name
+HAVING total_marks > 500;
+
+
+
 IPV 4 vs IPV 6
 Computers on the internet talk to each other through IP addresses, so understanding IP address is important. 
 IP addresses are of two types: IPv4 and IPv6. IPv4 addresses are 32-bit addresses having four octets with numbers 0 to 255, providing more than 4 billion IP addresses. 
