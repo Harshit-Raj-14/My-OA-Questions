@@ -1,0 +1,64 @@
+PS:
+You are given a string S consisting of lowercase letters. Additionally, a specific character, denoted as K, is provided. 
+The objective is to determine the minimum number of swaps required to bring all occumences of the character K together within the given string.
+
+Input format
+The first line of input contains a string S, and all characters are in the lowercase English alphabet.
+The next line contains a character K.
+
+Constraints
+Length of string <= 2000
+
+Output format
+Return an integer dendung the minimum number of swaps required to bring all occurrences of the character K together withir the given string
+
+eg: programming g
+op: 1
+
+
+/* CODE */
+
+public static int solve(String s, char k){
+  // Calculate the number of K's in the string
+        int kCount = 0;
+        for (char c : S.toCharArray()) {
+            if (c == K) kCount++;
+        }      
+        // If there are no K's or only one K, no swaps needed
+        if (kCount <= 1) return 0;
+        // Sliding window approach
+        int maxKInWindow = 0;
+        int currentKInWindow = 0;
+        // Initial window
+        for (int i = 0; i < kCount; i++) {
+            if (S.charAt(i) == K) currentKInWindow++;
+        }
+        maxKInWindow = currentKInWindow;
+        // Slide the window
+        for (int i = kCount; i < S.length(); i++) {
+            // Remove the influence of the character going out of the window
+            if (S.charAt(i - kCount) == K) currentKInWindow--;
+            // Add the influence of the new character coming into the window
+            if (S.charAt(i) == K) currentKInWindow++;
+            // Update the maximum number of K's found in any window
+            maxKInWindow = Math.max(maxKInWindow, currentKInWindow);
+        }
+        // The result is the total number of K's minus the maximum number found in any window
+        int minSwaps = kCount - maxKInWindow;
+        return minSwaps;
+}
+
+
+
+
+
+
+MCQs
+
+Q) In the given pseudo code, Class C is donved from Class A and contains an object of Class B. Identify the relationships among the classes A, B and C.
+Ans.)    
+Class C is derived from Class A: This indicates an inheritance relationship, where Class C is a subclass of Class A (i.e., Class C is-a Class A).
+Class C contains an object of Class B: This indicates a composition relationship, where Class C has an object of Class B (i.e., Class C has-a Class B).
+Given these relationships, the correct answer is:
+    C->A IS-A
+    C->B HAS-A
