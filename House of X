@@ -1,0 +1,232 @@
+NaN===NaN => false
+Reason : If x is NaN, return false. If y is NaN, return false. This means that the algorithm first checks if one of the operands is NaN before even checking their types and if so it will return false anyways
+
+Virtual Private Cloud (VPC) - A Virtual Private Cloud (VPC) is a cloud computing service that provides users with a private network within a public cloud environment. 
+
+HTTP STATUS CODE-
+200 OK: The request has succeeded.
+400 Bad Request: The server could not understand the request due to invalid syntax.
+401 Unauthorized: The client must authenticate itself to get the requested response.
+404 Not Found: The server can not find the requested resource.
+500 Internal Server Error: The server has encountered a situation it doesn't know how to handle.
+
+
+Containerization at the OS level refers to a lightweight form of virtualization that enables applications to run in isolated user spaces, called containers, on a shared operating system (OS) kernel. 
+Unlike traditional virtual machines (VMs), which require a separate OS for each instance, containers share the host OS kernel but have isolated environments to run applications.
+
+
+Full URL: https://www.example.com:8080/path/to/resource?query=example#fragment
+    Scheme: https
+    Host: www.example.com
+    Port: 8080
+    Path: /path/to/resource
+    Query String: query=example
+    Fragment: fragment
+
+
+React Reconciliation is the process through which React updates the Browser DOM. It makes the DOM updates faster in React. It updates the virtual DOM first and then uses the diffing algorithm to make efficient and optimized updates in the Real DOM.
+
+
+Optimise react-  https://www.freecodecamp.org/news/react-performance-optimization-techniques/
+
+Create a function that returns a promise that resolves to an integer value after 5s. Clue: use setTimeout and Promise.
+function resolveAfter5Seconds() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(42); // This is the integer value the promise will resolve to
+        }, 5000); // 5000 milliseconds = 5 seconds
+    });
+}
+
+// Usage
+resolveAfter5Seconds().then((value) => {
+    console.log(value); // This will log "42" after 5 seconds
+});
+
+
+
+In JavaScript, multithreading can be achieved using Web Workers. Web Workers allow you to run scripts in background threads, enabling you to perform CPU-intensive operations without blocking the main thread, which is crucial for maintaining a responsive user interface.
+
+
+
+
+A Promise in JavaScript is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. Promises are a way to handle asynchronous operations more gracefully and avoid callback hell (nested callbacks).
+Key Features of Promises:
+
+    Pending: The initial state of a promise. The operation is neither completed nor failed.
+    Fulfilled: The operation completed successfully, and the promise has a resulting value.
+    Rejected: The operation failed, and the promise has a reason for the failure (error).
+
+Creating a Promise:
+
+You can create a new promise using the Promise constructor, which takes a function (executor) with two parameters: resolve and reject. These parameters are functions that you call to either fulfill or reject the promise.
+
+javascript
+
+const myPromise = new Promise((resolve, reject) => {
+    // Asynchronous operation
+    let success = true; // This is just an example condition
+    if (success) {
+        resolve('Operation was successful!'); // Fulfill the promise
+    } else {
+        reject('Operation failed.'); // Reject the promise
+    }
+});
+
+
+
+
+
+
+
+
+
+React Hooks are functions that let you use state and other React features in functional components. They were introduced in React 16.8 to enable stateful logic and side effects in function components, making it easier to reuse stateful logic between components and avoid the complexities of class components.
+Key React Hooks
+
+    useState:
+        Allows you to add state to functional components.
+        Returns an array with the current state and a function to update it.
+
+    javascript
+
+import React, { useState } from 'react';
+
+function Counter() {
+    const [count, setCount] = useState(0);
+
+    return (
+        <div>
+            <p>You clicked {count} times</p>
+            <button onClick={() => setCount(count + 1)}>
+                Click me
+            </button>
+        </div>
+    );
+}
+
+useEffect:
+
+    Allows you to perform side effects in function components.
+    Similar to lifecycle methods componentDidMount, componentDidUpdate, and componentWillUnmount in class components.
+
+javascript
+
+import React, { useEffect, useState } from 'react';
+
+function Example() {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        document.title = `You clicked ${count} times`;
+
+        // Cleanup function (optional)
+        return () => {
+            document.title = 'React App';
+        };
+    }, [count]); // Only re-run the effect if count changes
+
+    return (
+        <div>
+            <p>You clicked {count} times</p>
+            <button onClick={() => setCount(count + 1)}>
+                Click me
+            </button>
+        </div>
+    );
+}
+
+useContext:
+
+    Allows you to use the context API in functional components.
+    Accepts a context object (the value returned from React.createContext) and returns the current context value.
+
+javascript
+
+import React, { useContext } from 'react';
+
+const ThemeContext = React.createContext('light');
+
+function ThemedButton() {
+    const theme = useContext(ThemeContext);
+
+    return <button style={{ background: theme === 'dark' ? '#333' : '#FFF' }}>I am styled by theme context!</button>;
+}
+
+useReducer:
+
+    An alternative to useState for managing more complex state logic.
+    Accepts a reducer function and an initial state, and returns the current state and a dispatch function.
+
+javascript
+
+import React, { useReducer } from 'react';
+
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+    switch (action.type) {
+        case 'increment':
+            return { count: state.count + 1 };
+        case 'decrement':
+            return { count: state.count - 1 };
+        default:
+            throw new Error();
+    }
+}
+
+function Counter() {
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    return (
+        <div>
+            <p>Count: {state.count}</p>
+            <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+            <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+        </div>
+    );
+}
+
+
+
+
+
+
+
+
+
+Custom Hooks
+
+You can also create custom hooks to encapsulate and reuse logic across multiple components.
+
+javascript
+
+import { useState, useEffect } from 'react';
+
+function useFetch(url) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data);
+                setLoading(false);
+            });
+    }, [url]);
+
+    return { data, loading };
+}
+
+function App() {
+    const { data, loading } = useFetch('https://api.example.com/data');
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    return <div>Data: {JSON.stringify(data)}</div>;
+}
+
+React Hooks provide a powerful and flexible way to manage state and side effects in functional components, making it easier to write clean, reusable code.
