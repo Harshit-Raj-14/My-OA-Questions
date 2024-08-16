@@ -1,0 +1,32 @@
+In React, components are the building blocks of UI. Let's break down the key differences between Functional and Class Components:
+
+👉 Functional Components:
+
+✨ Plain JavaScript functions.
+✨ Accept props as arguments and return JSX.
+✨ No render() method used.
+✨ Also known as Stateless components.
+✨ Run from top to bottom and can't be kept alive after returning.
+
+👉 Class Components:
+
+✨ Require extending from React.Component.
+✨ Have a render() method returning JSX.
+✨ Also known as Stateful components.
+✨ Utilize lifecycle methods like componentDidMount.
+✨ Instantiated and can keep different lifecycle methods alive.
+
+
+⚡️ Using Hooks ⚡️
+
+Functional components support Hooks, which enable stateful logic. Example:
+
+const [name, setName] = React.useState('');
+
+
+🚧 Syntax Variation 🚧
+
+Functional Component syntax is straightforward.
+Class Component syntax includes a constructor for state management.
+
+🌟 React offers flexibility with these two types of components, each serving its purpose depending on the specific requirements of your application! 🌟
