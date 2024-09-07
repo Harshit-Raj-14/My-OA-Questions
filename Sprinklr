@@ -1,0 +1,30 @@
+R1 (coding round, level: hard, 60 mins)
+3 problems; the first was an ad-hoc problem, in which one needs to observe a pattern that was enough to solve; the second was a variant of knapsack (for brute) for the optimal solution DP along with matrix exponentiation was required, third problem was based on finding the largest element in a submatrix of a matrix (this may not be the exact problem, but solving this subproblem efficiently was required).
+
+R2 (technical, level: medium-hard, duration: 60 mins, interviewer exp: 2 years)
+The interview starts with a quick intro, then resumes grilling; a puzzle was asked afterward.
+
+Puzzle: given a number. Of the form (x^2-1), where x is prime, prove that it is divisible by 24. Then, a simple problem: given a vector of a string of numbers, you need to find the lexicographically largest string that can be formed.
+
+Now, a series of graph subproblems start here.
+
+First subproblem: given a graph with total N nodes and K nodes marked as petrol pumps, find the distance of the nearest petrol pump for each node. The graph is connected, and all edge weights are the same.
+
+Second subproblem: now the edge weights are different.
+
+Third subproblem: Imagine now a tree (with no petrol pump) is disconnected from the initial graph. You want to connect the tree with the graph. Now, which vertex will you choose from the tree and graph, such that tree nodes have an overall distance from the nearest petrol pump that is as minimal as possible? Also, pseudocode was enough for these subparts.
+
+R-3 (technical, level - medium, duration: 60 mins, interviewer exp: 4 yrs)
+This round went at a fast pace; the interviewer seemed to be in a little hurry, so he skipped any intro and directly started with my resume grilling.
+Then he gave me 2 DSA problems.
+
+Problem 1: Given a sorted matrix, both row-wise and column-wise, tell whether a no. exists in a matrix; the expected time complexity here was O(n+m), where n and m are corresponding rows and columns.
+
+Problem 2: Given a matrix with only two characters, i.e., '+' and '-,' where '+' represents covid positive and '-' represents healthy people, I was asked to return the minimum number of days, such that all the people become covid positive.
+After this, he started grilling on CS fundamentals: OS, OOPS, DBMS, and computer networks.
+
+R-4 (technical, level: something between medium and medium-hard, duration: 60 mins, interviewer exp: 7 years)
+Starting with a quick intro, I was asked why my CGPA was low and which is your worst subject and why, then he asked a design problem (LLD specifically)
+
+Problem statement: Design a deck of cards, initialize it, and implement shuffle functionality.
+
