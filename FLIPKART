@@ -1,0 +1,27 @@
+𝐅𝐥𝐢𝐩𝐤𝐚𝐫𝐭 𝐈𝐧𝐭𝐞𝐫𝐯𝐢𝐞𝐰 𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞 ( off-campus )
+
+𝐑1 (coding round, level: medium-hard, duration: 60mins): 
+Consists of three problems; 
+the first was basically a simple math formula-based problem, 
+the second was Sieve of Eratosthenes + dp problem, 
+the third was given a 2D grid. You have to tell the person's initial health so that he can reach the bottom-right part of the grid, and while traveling, his health can go up or down based on the value present in the cell. 
+(His health has to be positive throughout the journey). (The problem setter took the Dungeon game problem from Leetcode and flipped it; it's a well-known problem).
+
+𝐑2 ( PS/DS round 1, level: medium, duration: 60 mins): 
+It consists of 2 DSA problems. 
+First was given two strings, s and t, you have to determine whether s is a subsequence of t; 
+the second problem was given two vectors; first is the fuel ( fuel present at the present station) and cost (fuel required to reach the next station), 
+you have to return the starting index so that we can do a circular tour (gas station problem on leetcode).
+
+𝐑3(PS/DS round 2, level: something between medium and medium-hard, duration: 60 mins): 
+It consists of 2 DSA problems. The first one was given an array; you have to find its local peak (in log(n) complexity obv), and arr[-1] and arr[n] one can assume to be negative infinity; 
+the second problem was given a binary tree, each node has some funds allocated; a robber wants to steal the maximum funds possible, but he can't steal from two consecutive nodes (parents and child, both basically); 
+the tree input was given in the form of an array. First, I was required to convert the array to a binary tree and then solve the problem. (house robber on binary tree, basically)
+
+𝐑4 (Hiring Manager, duration: 50 mins): In this round, the Interviewer mainly discussed my resume, what work I did in my internship and my projects. 
+There was a lot of cross-questioning based on my work, and apart from that, some situation based questions were asked, 
+such as if multiple teams were working on a project, and others are working slowly what will you do, or let's say you are new to some given tech stack and have a deadline for a given project, 
+how would you allocate your time? Some technical questions at the end are: What's the difference between stack and heap, and what can be the possible states of a thread?
+
+𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬: Except for the hiring manager round, the focus was on my problem-solving ability, how well I can convey my solution, and how well I can convert my idea/thought into a fully working solution, 
+the problems was mostly medium level. The last round was mainly discussion of my work and whether I was culturally fit for the company.
