@@ -10,7 +10,7 @@ Consists of three problems;
 𝐑2 ( PS/DS round 1, level: medium, duration: 60 mins): 
 It consists of 2 DSA problems. 
 ->First was given two strings, s and t, you have to determine whether s is a subsequence of t.
-(SOLUTION: use two pointer approach -> iterate over s while keeping a matching pointer over t, if pointer over t reaches end, is a subsequence)
+(SOLUTION: use two pointer approach -> iterate over s while keeping a matching pointer over t, if pointer over t reaches end, is a subsequence. EDGE CASE : empty s or t)
 
 ->Second problem was given two vectors; first is the fuel (fuel present at the present station) and cost (fuel required to reach the next station), 
 you have to return the starting index so that we can do a circular tour (gas station problem on leetcode).
