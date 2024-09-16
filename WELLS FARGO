@@ -1,0 +1,17 @@
+HACKERRANK OA - SKILL TEAM 
+QUESTION---
+Skill level of players are given. You are given an upperbound and lowerbound of skill levels and also k which is the minimum number of players required to make a team. 
+You have to find the number of ways to form a team of >=k players whose skills are within the bounds.
+Example:
+[INPUT]: skills = [12, 4, 6, 13, 5, 10], minPlayers = 3, minLevel = 4, maxLevel = 10
+[OUTPUT] :5
+Explanation:
+The list includes players with skill levels [12, 4, 6, 13, 5, 10]
+They want to hire at least 3 players with the skill levels between 4 and 10, inclusive
+Four of the players with the following skill levels (4, 6, 5, 10) meet the criteria.
+There are 5 ways to form a team of at least 3 players: (4, 5, 6), (4, 6, 10), (4, 5, 10), (6, 6, 10), (4, 5, 6, 10)
+
+SOLUTION---
+We will first count the number of elements x's that lie in the range LB<=x<=UB. Let's say this count is C. => BY linear search
+Then if C is less than K we cannot form a team so return -1. 
+Now from the C elements, we can select at least K elements in NCK + NC(K+1) + NC(K+2) + ...... + NC(N), where NCK = N!/(K! * (N-K)!).
