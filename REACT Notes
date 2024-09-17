@@ -30,3 +30,53 @@ Functional Component syntax is straightforward.
 Class Component syntax includes a constructor for state management.
 
 🌟 React offers flexibility with these two types of components, each serving its purpose depending on the specific requirements of your application! 🌟
+
+
+
+
+
+### callback function
+const notifyCustomer = () => {
+  console.log("Calling customer");
+};
+
+const order = (item, callback) => {
+  console.log(`Preparing your ${item}`);
+  setTimeout(() => {
+    console.log(`Your ${item} is prepared`);
+    callback();
+  }, 2000);
+};
+
+order("Burger", notifyCustomer);
+
+Output:
+Preparing your Burger 
+[after 2 s]
+Your Burger is prepared
+Calling customer
+
+
+### Synchronous
+console.log("Opens Instagram");
+console.log("Reel uploaded");
+console.log("Opens reels");
+
+Output:
+Opens Instagram
+Reel uploaded
+Opens reels
+
+
+### Asynchronous
+console.log("Opens Instagram");
+function f1() {
+  console.log("Reel uploaded");
+}
+setTimeout(f1, 2000);
+console.log("Opens reels");
+
+Output:
+Opens Instagram
+Opens reels
+Reel uploaded -> this statment wes given as a thread to be processed later so that user can see reels first and not wait
