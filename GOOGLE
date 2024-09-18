@@ -122,3 +122,9 @@ public class FreeTimeFinder {
         return freeIntervals;
     }
 }
+
+/*
+Approach:
+Merge Intervals: First, gather all the busy intervals, sort them by startTime, and merge overlapping or adjacent intervals to get the combined busy time for everyone.
+Find Free Intervals: Once the busy intervals are merged, the free intervals are simply the gaps between the merged busy intervals.
+*/
