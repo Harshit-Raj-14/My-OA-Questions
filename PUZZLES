@@ -1,0 +1,22 @@
+CAMEL PUZZLE - https://www.youtube.com/shorts/-SEQoXqwSlA
+
+Max - 533 Bananas
+
+Note - Always we are getting max output of 533 Bananas at 1000 km distance, while carrying 1000 banana for each trip of 200 km or lesser distance, even upto 1km on each carry trip, but it will going to lesser output if we increase the each trip distance to 200+km, or unplanned trips)
+
+Lets take an example:
+First trip distance to 200 km - 2000 Left
+(1000 banana - 200 ate - 200 carry back - 600 Left
+1000 banana - 200 ate - 200 carry back - 600 Left
+1000 banana - 200 ate - 800 Left)
+
+Second Trip to more 200 km - 1400 Left 
+(1000 banana - 200 ate - 200 carry back - 600 Left
+1000 banana - 200 ate - 800 left)
+
+Third trip to more 133 km - 1001 Left
+(1000 banana - 133 ate - 133 carry back - 734 Left
+400 banana - 133 ate - 267 left)
+
+ Fourth or the last trip to 467 km - 533 left
+(1000 Bananas - 467 ate - 533 left)
