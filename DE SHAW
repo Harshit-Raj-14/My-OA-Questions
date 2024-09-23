@@ -1,0 +1,15 @@
+OA---
+- Distributing k sweets among n employees
+
+
+Interview Rounds:
+Round 1:
+- Problem 1: Given an array, replace `a[i]` by `a[a[i]]`, and determine the minimum number of operations needed to stabilize the array.
+- Problem 2: Given the head of a linked list, remove the nth node from the end and return the updated list.
+
+Round 2:
+• System Design Question: Design a system for managing customer orders and deliveries in a quick commerce platform. I was asked to provide:
+ - Requirements
+ - Class diagrams
+ - API and database design (with justification for SQL or NoSQL for each component)
+ - Design patterns that I would implement
