@@ -1,3 +1,36 @@
+AMAZON SQL INTERVIEW----
+This is a famous interview question asked by Amazon:
+Question: Given the reviews table, write a query to retrieve the average star rating for each product, grouped by month. The output should display the month as a numerical value, product ID, 
+and average star rating rounded to two decimal places. Sort the output first by month and then by product ID.
+You can find the full details here: https://lnkd.in/ggXuYQwG
+
+Let's solve it together:
+As a interviewee, when given this SQL problem, my approach would focus on clarity and accuracy.
+The task is to calculate the average review ratings for each product by month from a reviews dataset, where we have fields like submit_date, product_id, and stars. 
+The challenge is to group the reviews by product and month while calculating the average rating and rounding it to two decimal places.
+
+Step 1: Extract the Month
+Since there’s no dedicated month field, the first step is to extract the month from submit_date. SQL’s EXTRACT() function will allow us to do that:
+
+Step 2: Group the Data
+We need to group the data by both month and product_id to get the average rating for each combination. The GROUP BY clause is used for this purpose:
+
+Step 3: Calculate the Average
+Using AVG(), we can calculate the average rating for each group. To ensure that the results are rounded to two decimal places, I will use the ROUND() function:
+
+Step 4: Sort the Results: 
+Finally, the results are sorted by month and product_id using the ORDER BY clause.
+
+SELECT
+EXTRACT(MONTH FROM submit_date) AS mth,
+product_id,
+ROUND (AVG(stars), 2) AS avg_stars
+FROM reviews
+GROUP BY EXTRACT (MONTH FROM submit_date), product_id
+ORDER BY mth, product_id;
+
+
+
 10 Most Commonly Asked SQL Interview Questions:
 
 📍 What is normalization and why is it important?
