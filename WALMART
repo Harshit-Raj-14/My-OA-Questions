@@ -1,0 +1,19 @@
+Problem Statement: [Its actually Next Permutation leetcode]
+Given a number n , find the smallest number that has the same set of digits as n and is greater than n . If n is the greatest possible number with its set of digits, then print “not possible”.
+
+Approach:
+1. Identify the pivot: Traverse the number from right to left to find the first digit that is smaller than the digit next to it.
+2. Find the successor: Traverse the digits to the right of the pivot to find the smallest digit that is larger than the pivot.
+3. Swap: Swap the pivot with this successor.
+4. Sort: Sort the digits to the right of the pivot in ascending order.
+
+Example:
+For \( n = 534976 \):
+1. Pivot: 4 (since 4 < 9)
+2. Successor: 6 (smallest digit greater than 4)
+3. Swap: 536974
+4. Sort: 536479
+
+Result: 536479
+
+If no such pivot is found, return “not possible”.
