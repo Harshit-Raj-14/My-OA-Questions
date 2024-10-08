@@ -1,0 +1,22 @@
+Which one is faster: `ans += s[i]` or `ans = ans + s[i]`?
+The answer is that `ans += s[i]` is significantly faster than `ans = ans + s[i]`. But why is that?
+
+Let's break it down.
+ In the case of `ans += s[i]`:
+1. It directly finds the memory location of `ans`.
+2. It appends `s[i]` to `ans`.
+
+This is efficient and only involves two basic steps.
+ Now, let’s look at `ans = ans + s[i]`:
+1. It evaluates the expression `ans + s[i]`.
+2. It finds the memory location of `ans`.
+3. Copies the content of `ans` into a temporary variable.
+4. Adds `s[i]` to the temporary variable.
+5. Stores the result back into `ans`.
+6. Finally, it writes the modified value back into `ans`.
+
+This process not only involves additional steps, but also searches for the memory location of `ans` twice, which leads to overhead and affects performance.
+So, while both operations achieve the same result, the simplicity and efficiency of `ans += s[i]` make it much faster.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
