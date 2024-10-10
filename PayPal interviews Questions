@@ -1,0 +1,33 @@
+LEETCODE
+https://leetcode.com/problems/wildcard-matching/description/
+https://leetcode.com/problems/reverse-pairs/description/
+https://leetcode.com/problems/lexicographically-smallest-palindrome/description/
+https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/
+https://leetcode.com/problems/valid-palindrome-ii/description/
+https://leetcode.com/problems/find-all-anagrams-in-a-string/description/
+https://leetcode.com/problems/find-unique-binary-string/description/
+
+https://takeuforward.org/data-structure/find-k-th-permutation-sequence/
+
+
+
+
+
+/*******************************************************************************************/
+Given a binary string, identify and print all unique two-digit binary numbers(Unique, Non Zero) that can be formed by scanning the string in a single direction.
+// Example 1:
+// Input: "001100011"
+// Output: "01 11 10"
+00 wont be part of answer since its value is 0
+// Example 2:
+// Input: "1111"
+// Output: "11"
+
+/* CODE O(n) */
+public static List<String> checkSubstrings(String s) {
+    List<String> res = new ArrayList<>();
+    if (s.contains("11")) res.add("11");
+    if (s.contains("10")) res.add("10");
+    if (s.contains("01")) res.add("01");
+    return res;
+}
