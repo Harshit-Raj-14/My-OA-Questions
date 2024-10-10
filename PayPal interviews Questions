@@ -1,3 +1,4 @@
+
 LEETCODE
 https://leetcode.com/problems/wildcard-matching/description/
 https://leetcode.com/problems/reverse-pairs/description/
@@ -31,3 +32,61 @@ public static List<String> checkSubstrings(String s) {
     if (s.contains("01")) res.add("01");
     return res;
 }
+
+
+/************************************************************************************************/
+In java you have two MAX_VALUE given in Integer:
+int a = Integer.MAX_VALUE;
+int b = Integer.MAX_VALUE;
+Find the average of a and b without using long data type and ensuring the answer remains within the int range.
+
+/* CODE */
+static int computeAverage(int a, int b) {
+    return (a + (b-a)/2);
+}
+// Output is 2147483647
+/*
+LOGIC---
+The value of Integer.MAX_VALUE = 2147483647. Now what will happen if we increment it with value 1. The answer is surprisingly -2147483648, which is also the value of Integer.MIN_VALUE.
+So basically Integer.MAX_VALUE + 1 = Integer.MIN_VALUE
+This is called overflow in java.
+
+https://leetcode.com/discuss/interview-question/4882159/Paypal-Interview-Question%3A-DS-Round
+
+What is twos complement?
+Two’s complement is a way of representing negative numbers in binary. Java uses this system to store negative numbers.
+The way it is done is, you flip all the bits and add one to it. So twos compliment of 0000 0001 is
+1111 1110 + 1 =1111 1111
+
+if you take any positive 32 bit integer, flip the bits and add 1, you will get the binary representation of its negative value.
+This can be verified in java through below code.
+// gives you binary representation of -1
+System.out.println(Integer.toBinaryString(-1));
+//This will print 11111111111111111111111111111111
+
+/* WRONG ANSWER */
+int a = Integer.MAX_VALUE;
+int b = Integer.MAX_VALUE;
+static int computeAverage(int a, int b) {
+    return (((a+b)/2));
+}
+// Output is -1
+// Expected: 2147483647
+
+/* WRONG ANSWER */
+static int computeAverage(int a, int b) {
+    return ((a/2) + (b/2));
+}
+// Output is 2147483646
+// Expected: 2147483647
+Reason: Integer.MAX_VALUE is an odd number, dividing by 2 will return floor value
+
+/* CORRECT SOLUTION BY HANDLING ODD CASE */
+static int compute_average(int a, int b) {
+    return (a / 2) + (b/2) + ((a % 2 + b % 2) / 2);    //addign 1 as ciel value when sum of a and b is odd
+}
+// Output is 2147483647
+// Expected: 2147483647
+
+
+*/
