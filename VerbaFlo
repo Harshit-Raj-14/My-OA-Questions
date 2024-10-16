@@ -1,0 +1,133 @@
+Coderbyte - OA
+PS- Knight Jumps
+Have the function KnightJumps(str) read str which will be a string consisting of the location of a knight on a standard 8x8 chess board with no other pieces on the board. 
+The structure of str will be the following: "(x y)" which represents the position of the knight with x and y ranging from 1 to 8. 
+Your program should determine the number of spaces the knight can move to from a given location. 
+For example: if str is "(4 5)" then your program should output 8 because the knight can move to 8 different spaces from position x=4 and y=5.
+Examples
+Input: "(1 1)"
+Output: 2
+Input: "(2 8)"
+Output: 3
+
+/* CODE */
+import java.util.*; 
+import java.io.*;
+class Main {
+  public static int KnightJumps(String str) {
+        String[] cordinates = str.replace("(", "").replace(")", "").trim().split(" ");
+        int x = Integer.parseInt(cordinates[0]);
+        int y = Integer.parseInt(cordinates[1]);
+        int[][] moves = {
+            {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
+            {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
+        };
+        int ans = 0; 
+        for (int[] move : moves) {
+            int newX = x + move[0];
+            int newY = y + move[1];
+            if (newX >= 1 && newX <= 8 && newY >= 1 && newY <= 8) {
+                ans++;
+            }
+        }
+        return ans; 
+    }
+
+  public static void main (String[] args) {  
+    Scanner s = new Scanner(System.in);
+    System.out.print(KnightJumps(s.nextLine())); 
+  }
+}
+
+
+/*********************************************************************************************************************/
+PS- MongoDB Advanced Filtering
+Using the MongoDB query language, your query should return the FirstName, LastName, and Age of users in your collection who are older than 25 and have more than one interest. 
+The documents should be ordered by Age in descending order and then FirstName in ascending order. Your query will be excuted via the runCommand function.
+
+Remember to include the cursor option in your command with a batchSize set to 0.
+
+/* CODE */
+db.runCommand({
+    find: "yourCollectionName", // Replace with your actual collection name
+    filter: {
+        Age: { $gt: 25 },
+        interests: { $size: { $gt: 1 } }
+    },
+    projection: {
+        FirstName: 1,
+        LastName: 1,
+        Age: 1
+    },
+    sort: {
+        Age: -1,
+        FirstName: 1
+    },
+    cursor: {
+        batchSize: 0
+    }
+});
+
+
+/*****************************************************************************************************************************/
+PS- Python Sort and Manipulate
+In the Python file, you have a program that performs a GET request on the route https://coderbyte.com/api/challenges/json/date-list and then sort the object keys alphabetically. 
+However, the sorting should be case-insensitive, and the original data structure should be preserved (e.g., lists should remain lists, dictionaries should remain dictionaries). 
+Keep in mind that while the JSON format uses null, in Python, this is represented as None.
+Next, remove any duplicate dictionaries from lists. Two dictionaries are considered duplicates if they have the same keys and values in the same order. 
+Only the first occurrence should be preserved when an list contains duplicate dictionaries.
+
+Finally, remove any dictionary properties with all values set to an empty string or None (equivalent to null in JSON), and print a list of modified dictionaries. 
+Be sure to call json.dumps on the final list to convert it back to JSON format, where None in Python will be represented as null.
+
+Example Input:
+
+[{"name":"John","age":30,"city":"New York","country":"USA","Hobbies":["reading","swimming","hiking","swimming"],"occupation":"programmer","favorite_foods":{"Breakfast":"pancakes","Lunch":"","dinner":"pasta","Snack":""},"gear":{"type":"","material":"","color":null},"affiliations":["","",""],"friends":[{"name":"Jane","age":28,"city":"New York","country":"USA","occupation":null},{"name":"Tom","age":32,"city":"London","country":"UK","occupation":"teacher"},{"name":"Jane","age":28,"city":"New York","country":"USA","occupation":null}]}]
+
+Example Output:
+[{"age": 30, "city": "New York", "country": "USA", "favorite_foods": {"Breakfast": "pancakes", "dinner": "pasta"}, "friends": [{"age": 28, "city": "New York", "country": "USA", "name": "Jane"}, {"age": 32, "city": "London", "country": "UK", "name": "Tom", "occupation": "teacher"}], "gear": {}, "Hobbies": ["reading", "swimming", "hiking"], "name": "John", "occupation": "programmer"}]
+
+/* CODE */
+import requests
+import json
+
+def fetch_and_process_data():
+    # Perform GET request
+    response = requests.get('https://coderbyte.com/api/challenges/json/date-list')
+    data = response.json()
+
+    # Check if the data is a list
+    if isinstance(data, list):
+        # Function to remove duplicates from a list of dictionaries
+        def remove_duplicates(dict_list):
+            seen = set()
+            unique_dicts = []
+            for d in dict_list:
+                # Create a frozenset of the dictionary to use as a unique identifier
+                dict_tuple = frozenset(d.items())
+                if dict_tuple not in seen:
+                    seen.add(dict_tuple)
+                    unique_dicts.append(d)
+            return unique_dicts
+
+        # Clean up dictionaries by removing empty properties
+        def clean_dict(d):
+            return {k: v for k, v in d.items() if v not in (None, '')}
+
+        # Remove duplicates
+        unique_data = remove_duplicates(data)
+
+        # Clean the dictionaries
+        cleaned_data = [clean_dict(d) for d in unique_data]
+
+        # Print final modified list as JSON
+        final_json = json.dumps(cleaned_data, default=lambda x: None)
+        print(final_json)
+    else:
+        print("Unexpected data format")
+
+# Call the function
+fetch_and_process_data()
+
+
+
