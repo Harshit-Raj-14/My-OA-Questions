@@ -182,3 +182,74 @@ int main() {
     cout << res << endl;
     return 0;
 }
+
+
+/**************************************************************************************************************************************************************************************************/
+PS- 
+Calculate the remainder when p^(q!) is divided by r.
+
+/* CODE O(q^2⋅log(p)) */
+class Solution{
+    public static long solve(int p, int q, int r) {
+        long result = 1; // Initialize result to 1
+        for (int i = 1; i <= q; i++) {
+            result = powM(p, result, r); // Calculate p^(current result) % r
+        }
+        return result;
+    }
+
+    // Function to compute (base^exponent) % mod using modular exponentiation
+    public static long powM(int base, long exponent, int mod) {
+        long result = 1;
+        base = base % mod; // Update base if it is more than or equal to mod
+        while (exponent > 0) {
+            // If exponent is odd, multiply base with result
+            if ((exponent % 2) == 1) {
+                result = (result * base) % mod;
+            }
+            // exponent must be even now
+            exponent = exponent >> 1; // Divide exponent by 2
+            base = (base * base) % mod; // Square the base
+        }
+        return result;
+    }
+}
+
+/************************************************************************************************************************************************************************************/
+PS- https://thejoboverflow.com/p/p785/
+Professor X has to solve the perennial problem of the budget for school picnic
+Each student is identified by a unique Roll Number (r[i]) and a Unique Identification Number(a[i]). 
+The total amount of the trip will be calculated as the sum of the cost of each of the rounds as long as there are at least two students remaining in the class. In a single round:
+
+/* CODE */
+long solution(int n, long[] arr, long[] roll) {
+    long m = 1000000007;
+    long ans = 0;
+    // Validate the input sizes
+    if (n > arr.length || n > roll.length) {
+        throw new IllegalArgumentException("n cannot be greater than the size of arr or roll");
+    }
+    int min1Index = 0;
+    int min2Index = 0;
+    // Find both minimums in a single loop
+    for (int i = 1; i < arr.length; i++) {
+        if (arr[i] < arr[min1Index]) {
+            min1Index = i;
+        }
+    }
+    for (int i = 1; i < roll.length; i++) {
+        if (roll[i] < roll[min2Index]) {
+            min2Index = i;
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        if (i == min1Index || i == min2Index) continue;
+        ans += Math.min(arr[min1Index] * roll[i], roll[min2Index] * arr[i]);
+        ans %= m;
+    }
+    if (min1Index != min2Index) {
+        ans += (arr[min1Index] * roll[min2Index]) % m;
+        ans %= m;
+    }
+    return ans;
+}
