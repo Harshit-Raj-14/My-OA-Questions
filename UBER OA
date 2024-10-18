@@ -1,0 +1,184 @@
+PS- Number of Ways => https://www.hackerrank.com/contests/codeagon/challenges/number-of-ways-1/problem
+You are given three strings p, q and r. From the strings p and q, you can create all possible strings equal to r such that contains atleast one character from both the strings, 
+and the order of all the selected characters in individual strings is preserved.
+
+/* WRONG SOLUTION */
+import java.util.*;
+public class Solution{
+    static int m=1000000007;
+    static int summingstring(String p, String q, String r){
+        int n=p.length();
+        int m=q.length();
+        int k=r.length();
+        int dp[][][]=new int[n + 1][m + 1][k + 1];
+        for (int[][] layer : dp){
+            for (int[] row : layer){
+                Arrays.fill(row, -1);
+            }
+        }  
+        return solve(p, q, r, 0, 0, 0, dp);
+    }
+    
+    static int solve(String p, String q, String r, int i, int j, int k, int dp[][][]){
+        if (k == r.length()) return 1; // If we've matched the whole string r
+        if (dp[i][j][k] != -1) return dp[i][j][k]; 
+        int count=0;
+        // Try matching characters from string p
+        for (int idx=i; idx<p.length(); idx++){
+            if (p.charAt(idx) == r.charAt(k)){
+                count=(count + solve(p, q, r, idx+1, j, k+1, dp)) % m;
+            }
+        }
+        // Try matching characters from string q
+        for (int idx=j; idx<q.length(); idx++){
+            if (q.charAt(idx) == r.charAt(k)){
+                count=(count + solve(p, q, r, i, idx+1, k+1, dp)) % m;
+            }
+        }
+        return dp[i][j][k]=count;
+    }
+
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        String p=sc.next();
+        String q=sc.next();
+        String r=sc.next();
+        int result=summingstring(p, q, r);
+        System.out.println(result);
+    }
+}
+
+
+/* PARTIALLY ACCEPTED CODE */
+import java.util.Scanner;
+public class Main {
+    static long MOD = 1000000007L;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String a = sc.next();
+        String b = sc.next();
+        String c = sc.next();
+        int n = a.length();
+        int m = b.length();
+        int k = c.length();
+        // 1-indexing by adding a dummy character at the start
+        a = "*" + a;
+        b = "*" + b;
+        c = "*" + c;
+        // Dynamic allocation of dp array based on the lengths of a, b, and c
+        long[][][] dp = new long[n + 1][m + 1][k + 1];
+        dp[0][0][0] = 1;
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= m; j++) {
+                for (int len = 0; len < k; len++) {
+                    if (dp[i][j][len] != 0) {
+                        for (int ni = i + 1; ni <= n; ni++) {
+                            if (a.charAt(ni) == c.charAt(len + 1)) {
+                                dp[ni][j][len + 1] = (dp[ni][j][len + 1] + dp[i][j][len]) % MOD;
+                            }
+                        }
+                        for (int nj = j + 1; nj <= m; nj++) {
+                            if (b.charAt(nj) == c.charAt(len + 1)) {
+                                dp[i][nj][len + 1] = (dp[i][nj][len + 1] + dp[i][j][len]) % MOD;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        long ans = 0;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                ans = (ans + dp[i][j][k]) % MOD;
+            }
+        }
+        System.out.println(ans);
+    }
+}
+
+/* FULLY ACCEPTED CODE */
+//O(n^3) dp in O(n^2) memory
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+using namespace std;
+
+#define assert_range(x,a,b) assert((a) <= (x) and (x) <= (b))
+using ll = long long;
+const int A = 300;
+const int B = 300;
+const int C = 300;
+const int MOD = 1e9+7;
+
+void assert_string(const string& s) {
+    for (auto x : s) {
+        assert_range(x, 'a', 'z');
+    }
+}
+
+ll f[2][A+10][B+10]; // f[i][j][k] := number of ways to build C[1..i] from A[1..j] and B[1..k] such that A[j] and B[k] are the last taken letters in A and B respectively
+ll sumfa[2][A+10][B+10]; // sumfa[i][j][k] := sum over f[i][x][k] for 0 <= x <= j
+ll sumfb[2][A+10][B+10]; // sumfb[i][j][k] := sum over f[i][j][x] for 0 <= x <= k
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    string a, b, c;
+    cin >> a >> b >> c;
+    assert_string(a);
+    assert_string(b);
+    assert_string(c);
+
+    int sa = a.size();
+    int sb = b.size();
+    int sc = c.size();
+    assert_range(sa, 1, A);
+    assert_range(sb, 1, B);
+    assert_range(sc, 1, C);
+
+
+    f[0][0][0] = 1;
+    for (int j = 0; j <= sa; ++j) {
+        sumfa[0][j][0] = 1;
+    }
+    for (int k = 0; k <= sb; ++k) {
+        sumfb[0][0][k] = 1;
+    }
+    int cur = 1;
+    for (int i = 1; i <= sc; ++i, cur=1-cur) {
+        for (int j = 0; j <= sa; ++j) {
+            for (int k = 0; k <= sb; ++k) {
+                f[cur][j][k] = 0;
+                if (j > 0 and c[i-1] == a[j-1]) {
+                    f[cur][j][k] += sumfa[1-cur][j-1][k];
+                }
+                if (k > 0 and c[i-1] == b[k-1]) {
+                    f[cur][j][k] += sumfb[1-cur][j][k-1];
+                }
+                f[cur][j][k] %= MOD;
+            }
+        }
+        for (int j = 0; j <= sa; ++j) {
+            for (int k = 0; k <= sb; ++k) {
+                sumfa[cur][j][k] = f[cur][j][k];
+                sumfb[cur][j][k] = f[cur][j][k];
+                if (j > 0) {
+                    sumfa[cur][j][k] += sumfa[cur][j-1][k];
+                }
+                if (k > 0) {
+                    sumfb[cur][j][k] += sumfb[cur][j][k-1];
+                }
+                sumfa[cur][j][k] %= MOD;
+                sumfb[cur][j][k] %= MOD;
+            }
+        }
+    }
+    ll res = 0;
+    for (int j = 1; j <= sa; ++j) {
+        for (int k = 1; k <= sb; ++k) {
+            res += f[1-cur][j][k];
+            res %= MOD;
+        }
+    }
+    cout << res << endl;
+    return 0;
+}
