@@ -1,4 +1,68 @@
 PS-
+You are given a 2D array of integers heights representing terrain heights and two integers startRow and startCol indicating the water's starting point.
+Simulate the water flow from the starting point with these rules:
+1. Water flows to adjacent cells (up, down, left, right) if the adjacent cell's height is less than or equal to the current cell's height.
+2. The flow stops when no adjacent cell has a lower or equal height.
+Return a 2D array of integers where each cell contains the time step when it becomes wet, starting at 0 for the initial cell. If a cell remains dry, its value should be -1. 
+
+/* CODE */
+import java.util.Arrays;
+
+public class WaterFlow {
+    public static int[][] waterFlow(int[][] heights, int startRow, int startCol) {
+        int rows = heights.length;
+        int cols = heights[0].length;
+        int[][] ans = new int[rows][cols];
+        for (int[] row : ans) {
+            Arrays.fill(row, -1);
+        }
+        simulateFlow(heights, startRow, startCol, 0, ans);
+        return ans;
+    }
+
+    public static void simulateFlow(int[][] heights, int i, int j, int timeStep, int[][] ans) {
+        if (i < 0 || i >= heights.length || j < 0 || j >= heights[0].length) {
+            return;
+        }
+        if (ans[i][j] != -1 && ans[i][j] <= timeStep) {
+            return;
+        }
+        ans[i][j] = timeStep;
+        if (i + 1 < heights.length && heights[i + 1][j] <= heights[i][j]) {
+            simulateFlow(heights, i + 1, j, timeStep + 1, ans);
+        }
+        if (i - 1 >= 0 && heights[i - 1][j] <= heights[i][j]) {
+            simulateFlow(heights, i - 1, j, timeStep + 1, ans);
+        }
+        if (j + 1 < heights[0].length && heights[i][j + 1] <= heights[i][j]) {
+            simulateFlow(heights, i, j + 1, timeStep + 1, ans);
+        }
+        if (j - 1 >= 0 && heights[i][j - 1] <= heights[i][j]) {
+            simulateFlow(heights, i, j - 1, timeStep + 1, ans);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[][] heights = {
+            {4, 3, 2},
+            {3, 2, 1},
+            {2, 1, 0}
+        };
+        int startRow = 0;
+        int startCol = 0;
+        int[][] result = waterFlow(heights, startRow, startCol);
+        for (int[] row : result) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+}
+
+NOTE--- THE BLUNDER YOU MADE WAS YOU FORGOT TO PUT THE VISITED CHECK IN THE RECURSION CODE GIVING OBERFLOW.
+The main issue with your code is that it may lead to infinite recursion, causing a StackOverflowError or possibly a Time Limit Exceeded (TLE) error. 
+This happens because there are no conditions in place to prevent the same cell from being visited repeatedly. 
+If the current cell has a value greater than or equal to its neighboring cells, it will keep calling the solve method recursively, potentially looping back to the same cells without an end.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PS-
 Given an empty array that should contain integers numbers, your task is to process a list of queries on it. 
 Specifically, there are two types of queries: "+x" - append x to numbers numbers may contain multiple instances of the same integer. "-x" - remove all the instances of x from numbers. 
 After processing each query, count the number of triples (x, y, z) in numbers which meet this condition: both x - y and y z are equal to a given diff. 
@@ -43,6 +107,11 @@ public class TripleCounter {
     }
 }
 
+NOTE--- In this question you tried to make a list and tried to add and remove manually.
+You did not think the sequence does not matter and having the count is more than enough.
+Now as for the three sum type problem since here sequence does not matter.
+Now for the expression x-y=t and y-z=t you did not think x=y+t and z=y-t. so you need only one loop and query the other two through map.
+What a stupid blunder lost uber oa usa becuase of this.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PS- Number of Ways => https://www.hackerrank.com/contests/codeagon/challenges/number-of-ways-1/problem
