@@ -1,3 +1,50 @@
+PS-
+Given an empty array that should contain integers numbers, your task is to process a list of queries on it. 
+Specifically, there are two types of queries: "+x" - append x to numbers numbers may contain multiple instances of the same integer. "-x" - remove all the instances of x from numbers. 
+After processing each query, count the number of triples (x, y, z) in numbers which meet this condition: both x - y and y z are equal to a given diff. 
+Note that elements in numbers can be rearranged to form triples to meet the condition.
+
+/* CODE */
+public class TripleCounter {
+    public static int[] solution(String[] queries, int diff) {
+        List<Integer> numbers = new ArrayList<>();
+        Map<Integer, Integer> countMap = new HashMap<>();
+        List<Integer> result = new ArrayList<>();
+        for (String query : queries) {
+            if (query.startsWith("+")) {
+                int x = Integer.parseInt(query.substring(1));
+                numbers.add(x);
+                countMap.put(x, countMap.getOrDefault(x, 0) + 1);
+            } else if (query.startsWith("-")) {
+                int x = Integer.parseInt(query.substring(1));
+                numbers.removeIf(n -> n == x);
+                countMap.remove(x);
+            }
+            // Count triples
+            int tripleCount = 0;
+            for (int y : countMap.keySet()) {
+                int x = y + diff;
+                int z = y - diff;
+                if (countMap.containsKey(x) && countMap.containsKey(z)) {
+                    tripleCount += countMap.get(x) * countMap.get(y) * countMap.get(z);
+                }
+            }
+            result.add(tripleCount);
+        }
+        // Convert result list to array
+        return result.stream().mapToInt(i -> i).toArray();
+    }
+
+    public static void main(String[] args) {
+        String[] queries = {"+4", "+5", "+6", "+4", "+3", "-4"};
+        int diff = 1;
+        int[] output = solution(queries, diff);
+        System.out.println(Arrays.toString(output)); // Output: [0, 0, 1, 2, 4, 0]
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PS- Number of Ways => https://www.hackerrank.com/contests/codeagon/challenges/number-of-ways-1/problem
 You are given three strings p, q and r. From the strings p and q, you can create all possible strings equal to r such that contains atleast one character from both the strings, 
 and the order of all the selected characters in individual strings is preserved.
