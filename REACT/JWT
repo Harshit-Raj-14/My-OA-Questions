@@ -1,0 +1,105 @@
+JSON Web Token (JWT) is an open standard for securely transmitting information as a JSON object. It's digitally signed using HMAC or RSA/ECDSA, ensuring the data's integrity and authenticity.
+
+📌 Why JWT?
+
+    Authorization: Post-login, JWTs allow users to access permitted routes, services, and resources without re-authenticating.
+    Information Exchange: Securely transmit information, ensuring the sender's identity and data integrity.
+
+
+🔍 JWT Structure:
+
+1. Header: Specifies the token type and signing algorithm.
+{ "alg": "HS256", "typ": "JWT" }
+
+2. Payload: Contains claims (user data and metadata).
+{ "sub": "1234567890", "name": "John Doe", "admin": true }
+
+3. Signature: Verifies the token's integrity.
+HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret)
+
+🔄 How JWT Works in Spring Boot:
+
+1. User Authentication: User logs in, and the server issues a JWT.
+
+2. Token Usage: For subsequent requests, the client sends the JWT in the Authorization header.
+
+Authorization: Bearer <token>
+
+3. Server Validation: The server verifies the token's signature and grants access to protected resources if valid.
+
+Avoid storing sensitive data in JWT payloads and ensure tokens are short-lived to enhance security.
+
+The benefits of using JWT:
+
+    Statelessness: No need to store session data on the server.
+    Scalability: Ideal for distributed systems.
+    Security: Tokens can be signed and encrypted.
+
+High-Level Process
+
+    User Registration: Users can register by providing their credentials (username and password). In our application, the password is securely hashed using bcrypt before being stored in MongoDB.
+
+    User Login: During login, the user submits their credentials. The server verifies these credentials against the data stored in MongoDB. If authentication is successful, the server generates a JWT and sends it back to the client.
+
+    Token Storage: The generated JWT is sent to the client, typically stored in local storage or cookies. This token will be used for future requests to secure endpoints.
+
+    Protected Routes: For subsequent requests to protected routes, the client includes the JWT in the authorization header. The server extracts the token, verifies its validity, and grants access to the requested resources if the token is valid.
+
+
+Download Code: You can download the complete code example which I have explained in above video from below.
+You can also check Java Spring Boot Interview Playbook here: Link
+
+
+Advantages of JWT:
+
+    Stateless Authentication:
+        No server-side session storage is needed. Once issued, the token is self-contained and stores all necessary user information.
+        Ideal for microservices and distributed systems where maintaining a centralized session store would add complexity.
+
+    Scalability:
+        Since JWTs are stateless, they reduce the need for server-to-server communication for session validation, making it easier to scale horizontally.
+
+    Security with Digital Signatures:
+        JWTs can be signed with HMAC or RSA/ECDSA algorithms to ensure the token’s integrity, preventing tampering.
+
+    Reduced Database Load:
+        Each request carries the JWT, meaning there’s no need for frequent lookups to authenticate the user. This reduces the load on the database and improves performance.
+
+    Interoperability:
+        JWTs are platform-agnostic, meaning they can be used across different technologies and systems, making them ideal for API-based communication.
+
+    Efficient Transmission:
+        Encoded as a compact JSON object, JWTs are small and easy to transmit over HTTP headers, minimizing bandwidth usage.
+
+    Custom Claims:
+        JWTs allow embedding user metadata (claims) such as roles, permissions, or expiration times, making them flexible for various use cases.
+
+
+Disadvantages of JWT:
+
+    Token Size:
+        JWTs can become large, especially when custom claims are included. This might lead to increased payload size, affecting network performance for frequent requests.
+
+    No Built-In Revocation Mechanism:
+        Once issued, JWTs remain valid until they expire. There’s no straightforward way to revoke a token before its expiration, which can be a security concern if a token is compromised.
+
+    Security Risks:
+        If JWTs are not properly secured, they can be intercepted and misused. Using HTTPS is essential to prevent man-in-the-middle attacks.
+        Storing sensitive information in the token payload is dangerous, even though it’s encoded.
+
+    Token Expiration Handling:
+        If the expiration time is too short, it can cause frequent re-authentication. If too long, it increases the risk of misuse if the token is stolen.
+        Handling token refresh strategies can add complexity to the application logic.
+
+    Potential for Misuse:
+        If developers don’t follow best practices (e.g., not using strong signing algorithms or exposing sensitive data), JWTs can introduce vulnerabilities.
+
+    Compatibility Issues:
+        Not all browsers or platforms handle JWTs stored in local storage or cookies the same way, potentially leading to inconsistent behavior across clients.
+
+        Best Practices for JWT Usage in Spring Boot
+
+    Use short-lived tokens and implement refresh tokens to manage user sessions securely.
+    Always store JWTs securely (e.g., HTTP-only cookies) to prevent XSS attacks.
+    Use HTTPS to prevent interception of JWTs in transit.
+    Avoid putting sensitive data in the JWT payload, as it can be decoded.
