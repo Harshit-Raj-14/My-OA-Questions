@@ -1,0 +1,177 @@
+https://www.hungrycoders.com/blog/redis-caching-with-mongodb-in-spring-boot
+
+When working with modern applications, performance is critical, and one of the common bottlenecks in any backend system is the database. No matter how optimized your MongoDB queries are, you will often encounter latency when handling large datasets or frequent read operations. This is where Redis caching steps in, providing an efficient way to reduce the load on your database and speed up your Spring Boot application.
+
+Why Redis?
+
+Redis is an open-source, in-memory data store that is known for its low-latency access and ability to handle massive amounts of data. Because Redis stores data in memory, retrieval times are drastically faster compared to disk-based databases like MongoDB. Here’s why Redis works well as a caching solution:
+
+    In-Memory Storage: Data is stored in memory (RAM), allowing for near-instantaneous access.
+    Persistence Options: Though primarily an in-memory store, Redis offers persistence options, making it reliable.
+    Advanced Data Structures: Redis supports more than just key-value pairs; it can also store sets, hashes, lists, etc.
+    Scalability: It can handle large datasets and scale horizontally, making it suitable for high-traffic applications.
+
+
+Caching Strategies in Spring Boot
+
+When working with caching, it’s important to understand different caching strategies. The caching strategy you choose can affect how and when data is cached and updated. Below are some of the most commonly used caching strategies in Spring Boot.
+
+1. Cache-Aside (Lazy Loading)
+
+This is one of the most commonly used caching strategies, and it works as follows:
+
+    When the application needs to read data, it first checks the cache.
+    If the data is found in the cache, it returns the cached data.
+    If the data is not found (a cache miss), it loads the data from the underlying database and then stores it in the cache for future requests.
+
+
+This strategy is called "lazy loading" because the data is loaded into the cache only when it's first accessed.
+
+In Spring Boot, the @Cacheable annotation is used to implement cache-aside strategy:
+
+@Cacheable(value = "users", key = "#userId")
+
+public User getUserById(String userId) {
+
+    return userRepository.findById(userId).orElse(null);
+
+}
+
+​
+
+2. Write-Through
+In the write-through strategy, the cache is updated synchronously when the database is updated. This ensures that the cache always has the most up-to-date data, as writes to the database are immediately reflected in the cache.
+
+    When data is written to the database, it is also written to the cache.
+    Reads are performed directly from the cache.
+
+This strategy ensures data consistency between the cache and the database but may introduce some overhead because of the additional step of writing to the cache.
+
+Example:
+In Spring Boot, the @CachePut annotation can be used to ensure that both the cache and the database are updated when data is modified.
+
+@CachePut(value = "users", key = "#user.id")
+
+public User updateUser(User user) {
+
+    return userRepository.save(user);
+
+}
+
+​
+
+3. Write-Behind (Write-Back)
+
+In the write-behind strategy, the application writes data to the cache first and asynchronously writes the data to the database later. This approach allows for fast write operations since the cache is updated immediately, and the database is updated at a later point in time.
+
+    Write operations update the cache first.
+    The cache writes the data to the database in the background.
+
+
+This strategy provides better performance on write operations but can lead to data loss if the cache fails before the data is written to the database.
+
+4. Read-Through
+
+In the read-through strategy, the application interacts only with the cache, and the cache is responsible for loading data from the database if it’s not already in the cache. It’s somewhat similar to cache-aside, but in this case, the cache manages the loading of data transparently.
+
+    When the application needs data, it queries the cache.
+    If the data is not present, the cache automatically loads it from the database and returns it to the application.
+
+
+This strategy is ideal for ensuring that the cache is always fresh and that the application only interacts with the cache layer.
+
+5. Refresh-Ahead
+
+In the refresh-ahead strategy, the cache proactively refreshes itself before the data expires, ensuring that the cache always has up-to-date data. This approach avoids cache misses, especially for data that’s frequently requested, as the cache is preloaded with fresh data before it becomes stale.
+
+    The cache automatically refreshes the data at a pre-configured interval, before the cache entry expires.
+    This ensures that cached data is always fresh without incurring the cost of cache misses.
+
+
+This is useful in scenarios where certain data is highly requested and should always be readily available, such as configuration settings or frequently accessed data.
+
+Caching Annotations in Spring Boot
+
+Spring Boot makes it incredibly easy to implement caching using annotations. Here are the key caching annotations:
+
+1. @Cacheable
+
+Used to mark methods whose results should be cached.
+On subsequent invocations with the same arguments, the method result is returned from the cache without executing the method again.
+
+@Cacheable(value = "users", key = "#userId")
+
+public User getUserById(String userId) {
+
+    return userRepository.findById(userId).orElse(null);
+
+}
+
+2. @CachePut
+
+Updates both the cache and the database whenever the method is invoked.
+Ensures that the cache is always updated with the latest data from the method execution.
+
+@CachePut(value = "users", key = "#user.id")
+
+public User updateUser(User user) {
+
+    return userRepository.save(user);
+
+}
+
+3. @CacheEvict
+
+Removes an entry from the cache.
+Typically used when the data in the underlying data store is modified, and the cached data needs to be invalidated.
+
+@CacheEvict(value = "users", key = "#userId")
+
+public void deleteUser(String userId) {
+
+    userRepository.deleteById(userId);
+
+}
+
+4. @Caching
+
+Used to combine multiple caching operations in a single method.
+Allows for more complex caching configurations, such as applying both @Cacheable and @CachePut annotations on the same method.
+
+@Caching(
+
+    put = { @CachePut(value = "users", key = "#user.id") },
+
+    evict = { @CacheEvict(value = "users", key = "#user.id", condition = "#user.isInactive()") }
+
+)
+
+public User saveOrUpdateUser(User user) {
+
+    return userRepository.save(user);
+
+}
+
+5. @CacheConfig
+
+Used at the class level to share common cache settings, like cache names, across all methods in a class.
+
+@CacheConfig(cacheNames = "users")
+
+@Service
+
+public class UserService {
+
+    
+
+    @Cacheable(key = "#userId")
+
+    public User getUserById(String userId) {
+
+        return userRepository.findById(userId).orElse(null);
+
+    }
+
+}
+
+These caching strategies and annotations provide flexibility in how you implement caching in your Spring Boot applications. Whether you need to cache frequently accessed data, update caches on write operations, or handle cache evictions efficiently, Spring Boot has you covered with minimal configuration.
