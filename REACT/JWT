@@ -1,3 +1,5 @@
+https://www.hungrycoders.com/blog/jwt-authentication-in-spring-boot-with-mongodb
+
 JSON Web Token (JWT) is an open standard for securely transmitting information as a JSON object. It's digitally signed using HMAC or RSA/ECDSA, ensuring the data's integrity and authenticity.
 
 📌 Why JWT?
