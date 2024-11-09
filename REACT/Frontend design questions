@@ -1,0 +1,45 @@
+"How Would You Design an API?" - My Interview Answer
+During a recent interview for a backend developer role, the interviewer asked, "How would you design an API?" Here’s how I approached my answer, covering the end-to-end process I would follow.
+ 
+1. Understanding the Requirements and Use Cases
+Ask questions. What’s the API supposed to do? Who will use it—internal teams, external clients, or mobile apps? What types of data will it handle? These are critical to decide structure and performance.
+Identify core use cases. Is the API mainly for data retrieval (read-heavy) or handling frequent updates (write-heavy)? This impacts how you handle scalability and caching.
+
+2. Decide on API Type: REST vs. GraphQL
+REST API is a traditional, flexible choice that’s easy to cache and widely supported. It works well when your data access patterns are simple and predictable.
+GraphQL can be a better option if clients need flexibility, as it lets them request only what they need. It’s particularly useful in complex, data-rich applications with multiple frontend needs.
+
+3. Defining Resources and Endpoints
+Map out core resources like users, orders, or products, based on the functionality.
+Design endpoints to represent these resources logically (e.g., /users, /orders). I aim for consistent naming to make APIs more intuitive for developers.
+If needed, use nested resources for relationships (e.g., /users/{userId}/orders).
+
+4. Choose the Right HTTP Methods and Status Codes
+Each HTTP method has a specific purpose:
+GET for retrieving resources.
+POST for creating new resources.
+PUT for updating existing resources.
+DELETE for removing resources.
+Choose appropriate status codes to provide clear feedback:
+200 for success, 201 for creation, 204 for no content (delete success).
+400 for bad requests, 401 for unauthorized, 404 for not found, and 500 for server errors.
+
+5. Plan for Authentication and Authorization
+I recommend OAuth2 or JWT (JSON Web Tokens) for secure token-based authentication. This prevents unauthorized access and simplifies token management across services.
+Authorization (like checking user roles) is equally important to control who can do what, often implemented at the route or method level.
+
+6. Error Handling and Data Validation
+Good APIs handle errors gracefully. Instead of vague errors, provide descriptive error messages that make troubleshooting easier, especially for client developers.
+Validate inputs at every endpoint.
+
+7. Implement Pagination and Filtering for Large Data Sets
+APIs returning large data sets should support pagination (like limit and offset parameters) to improve performance.
+
+8. Plan for API Versioning
+APIs evolve, and breaking changes are inevitable. A versioning strategy like /api/v1/users gives flexibility for future updates.
+You can version by URL path (/v2/users), headers, or query parameters, depending on your needs and client preferences.
+
+
+
+
+DESIGN AN INFINTE SCROLL
