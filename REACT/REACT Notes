@@ -177,3 +177,103 @@ Output:
 Opens Instagram
 Opens reels
 Reel uploaded -> this statment wes given as a thread to be processed later so that user can see reels first and not wait
+
+
+
+PROMISE----
+A promise in JavaScript is an object that represents the eventual completion or failure of an asynchronous operation. It is used for handling asynchronous operations, 
+such as making API calls or reading files, in a more organized and readable way.
+
+Promises have three states:
+    Pending: The initial state. The promise is still being resolved or rejected.
+    Fulfilled: The asynchronous operation has been completed successfully, and the promise is resolved. It returns a value.
+    Rejected: The asynchronous operation has encountered an error, and the promise is rejected. It returns an error.
+
+Promises have two main methods:
+then(): This method is called when the promise is fulfilled. It takes two optional callbacks, one for success and one for failure. 
+The success callback receives the resolved value, and the failure callback receives the rejected error.
+catch(): This method is called when the promise is rejected. It takes a callback function that receives the error.
+
+Here's an example of using a promise to fetch data from an API:
+fetch('https://api.example.com/data')
+  .then(response => response.json())
+  .then(data => {
+    // Do something with the fetched data
+    console.log(data);
+  })
+  .catch(error => {
+    // Handle any errors that occurred during the fetch
+    console.error(error);
+  });
+
+
+Node.js is an open-source, cross-platform runtime environment that allows you to run JavaScript code on the server side. 
+This means you can build server applications using JavaScript, which is traditionally a client-side language.
+
+Here's a simple example of a Node.js server:
+const http = require('http');
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello, World!\n');
+});
+const PORT = 3000;
+server.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}/`);
+});
+
+In this code, we create a basic web server that responds with "Hello, World!" when accessed. 
+
+
+
+Difference between let, var and const
+var: This is the old way of declaring variables. Variables declared with var are function-scoped, meaning they are only accessible within the function they were declared in. 
+If declared outside a function, they become global. var can also be re-declared and updated.
+  var x = 10;
+  x = 20; // Allowed
+  var x = 30; // Allowed
+
+let: This is a newer way to declare variables. 
+Variables declared with let are block-scoped, meaning they are only accessible within the block {} they were declared in. They can be updated but not re-declared in the same block.
+  let y = 10;
+  y = 20; // Allowed
+  // let y = 30; // Not allowed in the same block
+
+const: This is used for constants. Variables declared with const are also block-scoped and cannot be updated or re-declared. 
+However, if the constant is an object or array, its properties or elements can still be changed.
+  const z = 10;
+  // z = 20; // Not allowed
+  const arr = [1, 2, 3];
+  arr.push(4); // Allowed, we can modify the array
+
+In summary:
+    Use var for function-scoped variables.
+    Use let for block-scoped variables that can change.
+    Use const for block-scoped variables that won't change.
+
+
+
+Export vs Export Default in JS
+When you see export default in a Javascript or React file, it means that the module is exporting a default value.
+
+For Example
+const add = (a,b) => a+b;
+const subtract = (a,b) => a-b;
+export default add;
+
+Now because we used the default keyword here, only the add function will be able to be exported from this file.
+I think of it like our subtract function has become private to only this file, so you can call the subtract function internally in this file but can't use it in other files.
+
+The advantage of using the default keyword is when you have only one function in a file and want to export that. 
+The advantage of using default in such scenarios is that other files can name it whatever they want and don't need to explicitly import it with the same name as exported and without using curly braces.
+
+For example:-
+// anotherFile.js
+// Importing the functions from functions.js
+import addFunction from './functions';
+const sumValues = addFunction (2, 3);
+console.log('Sum:', sumValues);
+
+Here I imported our add function with a different name but it still works. Because it was exported as a default function.
+
+In case you dont use export - we can't change the name when importing those functions because it wasn't exported as a default. Also, you cant export multiple functions as default.
