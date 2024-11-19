@@ -1,0 +1,10 @@
+𝗧𝗲𝗰𝗵𝗻𝗶𝗰𝗮𝗹 𝗥𝗼𝘂𝗻𝗱 𝟭
+2. Reversing a Linked List: Discussed and implemented the algorithm to reverse a linked list.
+3. Order of Arguments in printf (C): I learned later that this is compiler-dependent and unspecified in C standards.
+4. TCP vs UDP: Explained the differences between these two protocols and their respective use cases.
+5. Protocol Design: Was asked to design a transmission protocol for file downloads. This was a conceptual question requiring a mix of technical skills and creativity.
+
+𝗧𝗲𝗰𝗵𝗻𝗶𝗰𝗮𝗹 𝗥𝗼𝘂𝗻𝗱 𝟮
+Explained the design and key technical aspects, including that it uses WebRTC, which is based on UDP. 
+When asked how I would improve the project now, I connected it to my internship experience. I suggested adding chat functionality and other features to enhance usability, elaborating on the implementation details.
+4. TCP vs UDP (Follow-up): This time, I was asked to provide an example of TCP being used in video streaming too.
