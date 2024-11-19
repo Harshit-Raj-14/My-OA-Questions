@@ -28,3 +28,21 @@ Similar problems:
 https://leetcode.com/problems/merge-k-sorted-lists/description/
 https://leetcode.com/problems/number-of-islands/description/
 
+
+Interview
+R1 : LC 127. Word Ladder
+R2 : 
+LC 863. All Nodes Distance K in Binary Tree
+GFG. Connect n ropes with minimum cost
+> Q: Max steps with reduced m
+ - Gave O(n) solution, then optimized using binary search to O(log n) and later to O(log(sqrt(m))).
+R 3:
+LC 76. Minimum Window Substring
+- LC Hard; Smallest substring in ’s’ containing ’t’ as subsequence
+- Came up with a sliding window approach.
+
+[2] Amazon Leadership Principles:
+- Time when you went above and beyond to meet a customer’s needs? (Customer Obsession)
+- Time when you had to make a quick decision with limited information? (Bias for Action)
+
+
