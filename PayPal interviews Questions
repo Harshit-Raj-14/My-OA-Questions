@@ -1,3 +1,14 @@
+Paypal interview
+Round 1: It started with tricky 𝐉𝐚𝐯𝐚 𝐜𝐨𝐥𝐥𝐞𝐜𝐭𝐢𝐨𝐧𝐬 𝐪𝐮𝐞𝐬𝐭𝐢𝐨𝐧𝐬, 𝐢𝐧𝐜𝐥𝐮𝐝𝐢𝐧𝐠 𝐭𝐡𝐞 𝐢𝐧𝐭𝐞𝐫𝐧𝐚𝐥 𝐰𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐟 𝐇𝐚𝐬𝐡𝐌𝐚𝐩 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐬𝐭𝐫𝐮𝐜𝐭𝐮𝐫𝐞 𝐨𝐟 𝐉𝐖𝐓 𝐭𝐨𝐤𝐞𝐧𝐬. 
+We then moved to DSA, where the first question was to code 𝐌𝐞𝐫𝐠𝐞 𝐒𝐨𝐫𝐭, followed by the 𝐀𝐠𝐠𝐫𝐞𝐬𝐬𝐢𝐯𝐞 𝐂𝐨𝐰𝐬 problem.
+
+Round 2: It started with a deep dive into my college project, focusing on the REST APIs I developed and the associated database schema. 
+We then discussed the HLD and LLD of my current project, where I shared my screen to present my design, which was well-received. 
+The interviewer then asked me to write a 𝐬𝐢𝐧𝐠𝐥𝐞𝐭𝐨𝐧 𝐜𝐥𝐚𝐬𝐬 𝐚𝐧𝐝 𝐟𝐮𝐫𝐭𝐡𝐞𝐫 𝐝𝐢𝐬𝐜𝐮𝐬𝐬 𝐡𝐨𝐰 𝐭𝐨 𝐦𝐚𝐤𝐞 𝐢𝐭 𝐭𝐡𝐫𝐞𝐚𝐝-𝐬𝐚𝐟𝐞, which i had already prepared using (https://www.youtube.com/watch?v=2Dw1v9QC408), thanks to Riddhi Dutta for such an awesome explanation. We transitioned to DSA.
+The first DSA question was to 𝐬𝐰𝐚𝐩 𝐭𝐰𝐨 𝐧𝐮𝐦𝐛𝐞𝐫𝐬 𝐰𝐢𝐭𝐡𝐨𝐮𝐭 𝐮𝐬𝐢𝐧𝐠 𝐚 𝐭𝐡𝐢𝐫𝐝 𝐯𝐚𝐫𝐢𝐚𝐛𝐥𝐞, followed by a more advanced question: 𝐌𝐢𝐧𝐢𝐦𝐮𝐦 𝐭𝐢𝐦𝐞 𝐫𝐞𝐪𝐮𝐢𝐫𝐞𝐝 𝐭𝐨 𝐢𝐧𝐟𝐞𝐜𝐭 𝐚𝐥𝐥 𝐧𝐨𝐝𝐞𝐬 𝐨𝐟 𝐚 𝐛𝐢𝐧𝐚𝐫𝐲 𝐭𝐫𝐞𝐞 (https://www.geeksforgeeks.org/minimum-time-required-to-infect-all-the-nodes-of-binary-tree/), 
+which is very similar to this question :- https://www.youtube.com/watch?v=2r5wLmQfD6g&list=PLkjdNRgDmcc0Pom5erUBU4ZayeU9AyRRu&index=32 
+
+
 
 LEETCODE
 https://leetcode.com/problems/wildcard-matching/description/
