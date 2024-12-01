@@ -2,3 +2,19 @@ Differnece between abstraction and encapsulation?
 Encapsulation hides variables or some implementation that may be changed so often in a class to prevent outsiders access it directly. They must access it via getter and setter methods.
 
 Abstraction is used to hide something too, but in a higher degree (class, interface). Clients who use an abstract class (or interface) do not care about what it was, they just need to know what it can do.
+
+
+PayPal java questions
+𝐢𝐧𝐭𝐞𝐫𝐧𝐚𝐥 𝐰𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐟 𝐇𝐚𝐬𝐡𝐌𝐚𝐩 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐬𝐭𝐫𝐮𝐜𝐭𝐮𝐫𝐞 𝐨𝐟 𝐉𝐖𝐓 𝐭𝐨𝐤𝐞𝐧𝐬.
+write a 𝐬𝐢𝐧𝐠𝐥𝐞𝐭𝐨𝐧 𝐜𝐥𝐚𝐬𝐬 𝐚𝐧𝐝 𝐟𝐮𝐫𝐭𝐡𝐞𝐫 𝐝𝐢𝐬𝐜𝐮𝐬𝐬 𝐡𝐨𝐰 𝐭𝐨 𝐦𝐚𝐤𝐞 𝐢𝐭 𝐭𝐡𝐫𝐞𝐚𝐝-𝐬𝐚𝐟𝐞, (Ridhi Dutta video)
+Comparator vs. Comparable, Semaphore vs. Mutex, Reentrant locks, How to overcome deadlock using locks, Indexes and their in-depth functionality
+We then transitioned into a detailed discussion on Kafka, covering areas like consumers, producers, topics, partitions, and its use cases. This segment involved several real-time problem-solving scenarios, such as:
+Designing a system to process 15 trillion messages in real time
+Diagnosing and addressing message delays of 3ms: possible reasons, recovery steps, and alerting measures to ensure customers remain unaffected.
+Scaling strategies when the number of brokers is fixed.
+Handling scenarios where, after a Kafka upgrade, services fail to connect. Questions included identifying potential issues, detecting such failures, and rolling back.
+
+https://medium.com/paypal-tech/scaling-kafka-to-support-paypals-data-growth-a0b4da420fab#:~:text=Kafka%20at%20PayPal&text=Today%2C%20our%20Kafka%20fleet%20consists,any%20impact%20to%20our%20business
+https://tech.phonepe.com/the-kafka-edge-managing-100-billion-daily-events-at-phonepe/
+https://www.confluent.io/events/kafka-summit-americas-2021/how-did-we-move-the-mountain-migrating-1-trillion-messages-per-day-across/
+https://blog.bytebytego.com/p/cloudflares-trillion-message-kafka
