@@ -1,0 +1,194 @@
+PS- Array Transfer
+Given data in the form of an array arr of size n. You have to transfer a subsequence of size m to the client.
+The time taken to transfer a subsequence of size m is the product of the first and last element of the subsequence, 
+as you do not want your client to wait, you want to minimize the time taken to transfer the subsequence of size M.
+what is the minimum time the client has to wait for a subsequence of size M?
+2 <= M <= N <= 10^5
+
+/* CODE */
+public class SubsequenceProduct {
+    public static int findMinProduct(int n, int m, int[] arr) {
+        int ans = arr[0] * arr[n - 1];      // Initial answer is the product of the first and last element
+        int[] prefix = new int[n];    // Prefix minimum array
+        prefix[0] = arr[0];
+        for (int i = 1; i < n; i++) {   // Fill the prefix minimum array
+            prefix[i] = Math.min(arr[i], prefix[i-1]);
+        }
+        // Evaluate the minimum product for all valid subsequences
+        for (int j = m-1; j<n; j++) {
+            int x = prefix[j-m+1]; // Minimum value up to index (j-m+1)
+            ans = Math.min(ans, x * arr[j]);
+        }
+        return ans;
+    }
+}
+
+/* O(n) */
+public class MinimumProduct {
+    public static int solve(int N, int M, int[] Arr) {
+        int ans = Integer.MAX_VALUE;
+        // Iterate over all possible starting points for the subsequence
+        for (int i = 0; i <= N - M; i++) {
+            int firstElement = Arr[i];  // The first element of the subsequence
+            int lastElement = Arr[i + M - 1];   // The last element of the subsequence
+            int product = firstElement * lastElement;
+            ans = Math.min(ans, product);
+        }
+        return ans;
+    }
+}
+
+/************************************************************************************************************************/
+PS- Seat reservation
+A movie theater has N seats numbered 1 to N.
+Build a seat reservation system that performs one of the following operations K times:
+• Fetches the smallest-numbered unreserved seat then reserves it and returns its number.
+• Cancels a seat reservation for seat[i].
+The result should be an array containing the reserved seat numbers.
+Notes
+If seat[i]=0, reserve the seat
+• If seat [i]> 0, cancel the reservation of a seat
+• Every time we reserve a seat, it is guaranteed that there is an unreserved seat
+• Every time we cancel the reservation of a seat, it is guaranteed that the seat is reserved
+
+/* CODE */
+public class SeatReservationSystem {
+    public static List<Integer> solution(int N, int K, int[] seats) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();  // Priority queue to track unreserved seats (min-heap)
+        Set<Integer> reserved = new HashSet<>();    // Set to track reserved seats
+        for (int i = 1; i <= N; i++) {  // Initialize the min-heap with all seat numbers
+            pq.add(i);
+        }
+        // List to store the results of reservations
+        List<Integer> ans = new ArrayList<>();
+        // Process each operation in the seats array
+        for (int i = 0; i < K; i++) {
+            int seat = seats[i];
+            if (seat == 0) { // Reserve the smallest-numbered unreserved seat
+                int reservedSeat = pq.poll(); // Fetch the smallest unreserved seat
+                reserved.add(reservedSeat); // Mark the seat as reserved
+                ans.add(reservedSeat); // Add to the ans
+            }
+            else { // Cancel the reservation for seat[i]
+                if (reserved.contains(seat)) {
+                    reserved.remove(seat); // Mark the seat as unreserved
+                    pq.add(seat); // Add the seat back to the min-heap
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+
+/* CODE */
+public class Solution {
+    public static List<Integer> solution(int N, int K, int[] seats) {
+        Set<Integer> reservedSeats = new HashSet<>();
+        List<Integer> ans = new ArrayList<>();
+        for (int ops : seats) {
+            if (ops == 0) { // Fetch the smallest unreserved seat
+                for (int seat = 1; seat <= N; seat++) {
+                    if (!reservedSeats.contains(seat)) {
+                        reservedSeats.add(seat);
+                        ans.add(seat);
+                        break;
+                    }
+                }
+            } else { // Cancel reservation for seat `ops`
+                reservedSeats.remove(ops);
+            }
+        }
+
+        return ans;
+    }
+}
+
+
+/*********************************************************************************************************************************************/
+PS- The coin problem
+Given N coins whose amount ranges from 0 to N-1 respectively. Your friend wants to take K coins out of your coins. You can only give the coins if the set of K coins is useful.
+A set of coins is useful if the sum of the coins is divisible by a given integer M.
+Find the number of ways in which your friend can get K coins. Since the answer can be large, print the answer modulo 10^9 +7.
+Function description
+Complete the solve function provided in the editor. This function takes the following 3 parameters and returns the answer.
+n. Represents the number of coins
+k Represents the amount of coin your friend wants
+m Represents the integer value
+
+
+/* CODE O(n*k*m) */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int m = sc.nextInt();
+        int dp[][] = new int[k + 1][m];
+        dp[0][0] = 1;
+        int MOD = (int) 1e9 + 7;
+        for (int i=0; i<n; i++) {
+            for (int k=k; k>0; k--) {
+                for (int j=0; j<m; j++) {
+                    int m1 = (j + i) % m;
+                    dp[k][m1] = (dp[k][m1] + dp[k - 1][j]) % MOD;
+                }
+            }
+        }
+        System.out.println(dp[k][0]);
+        sc.close();
+    }
+}
+
+
+/* CODE */
+public class Main {
+    static final int M = (int) 1e9 + 7;
+    static long solve(long n, long k, long m) {
+        long[][] prev = new long[(int) k + 1][(int) m + 1];
+        long[][] curr = new long[(int) k + 1][(int) m + 1]
+        prev[0][0] = 1;
+        prev[1][0] = 1;
+        curr[0][0] = 1;
+        for (long i = 1; i <= n - 1; ++i) {
+            for (long j = 1; j <= k; ++j) {
+                for (long p = 0; p < m; ++p) {
+                    curr[(int) j][(int) p] = prev[(int) j][(int) p];
+                    curr[(int) j][(int) p] += prev[(int) (j - 1)][(int) ((p - i + m) % m)];
+                    curr[(int) j][(int) p] %= M;
+                }
+            }
+            prev = curr;
+        }
+        return prev[(int) k][0];
+    }
+}
+
+/* CODE */
+public class Main {
+    static final int M = (int) 1e9 + 7;
+    static int solve(int n, int k, int m) {
+        int[][] prev = new int[k + 1][m + 1];
+        int[][] curr = new int[k + 1][m + 1];
+        prev[0][0] = 1;
+        prev[1][0] = 1;
+        curr[0][0] = 1;
+        for (int i = 1; i <= n - 1; ++i) {
+            for (int j = 1; j <= k; ++j) {
+                for (int p = 0; p < m; ++p) {
+                    curr[j][p] = prev[j][p];
+                    curr[j][p] += prev[j - 1][(p - i + m) % m];
+                    curr[j][p] %= M;
+                }
+            }
+            prev = curr;
+        }
+        return prev[k][0];
+    }
+}
+
+
+
+
+
+
