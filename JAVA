@@ -5,6 +5,11 @@ Abstraction is used to hide something too, but in a higher degree (class, interf
 
 
 PayPal java questions
+What is immutable in java ?? How to make a class as immutable ??
+Write code for thread safe singleton class .
+What is the use case of optional class.
+Write a class and show all OOPS principles ??
+How to make a functional interface.
 𝐢𝐧𝐭𝐞𝐫𝐧𝐚𝐥 𝐰𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐟 𝐇𝐚𝐬𝐡𝐌𝐚𝐩 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐬𝐭𝐫𝐮𝐜𝐭𝐮𝐫𝐞 𝐨𝐟 𝐉𝐖𝐓 𝐭𝐨𝐤𝐞𝐧𝐬.
 write a 𝐬𝐢𝐧𝐠𝐥𝐞𝐭𝐨𝐧 𝐜𝐥𝐚𝐬𝐬 𝐚𝐧𝐝 𝐟𝐮𝐫𝐭𝐡𝐞𝐫 𝐝𝐢𝐬𝐜𝐮𝐬𝐬 𝐡𝐨𝐰 𝐭𝐨 𝐦𝐚𝐤𝐞 𝐢𝐭 𝐭𝐡𝐫𝐞𝐚𝐝-𝐬𝐚𝐟𝐞, (Ridhi Dutta video)
 Comparator vs. Comparable, Semaphore vs. Mutex, Reentrant locks, How to overcome deadlock using locks, Indexes and their in-depth functionality
