@@ -46,3 +46,22 @@ LC 76. Minimum Window Substring
 - Time when you had to make a quick decision with limited information? (Bias for Action)
 
 
+
+Amazon SDE-1 Interview Experience | Off-Campus (November 2024)
+Round 1:
+- Questions: 
+ - Trapping Rain Water problem. 
+ - Print Left View of a Binary Tree – Discussed DFS and Level Order Traversal approaches, implemented DFS for its efficiency. 
+
+Round 2: 
+- Questions: 
+ - find sum of n elements after the kth smallest in BST – Solved using order statistics and preprocessing techniques. 
+ - Find the rotation count in a rotated sorted array – Solved by identifying the pivot element. 
+
+Round 3:
+Questions:
+ Count ways to reach nth stair
+– Presented solutions using recursion, DP, and optimized space techniques. 
+ - Designed a Recommendation Engine using a Trie. Implemented the full code with detailed time and space complexity analysis. 
+
+
