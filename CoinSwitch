@@ -23,20 +23,6 @@ public class SubsequenceProduct {
     }
 }
 
-/* O(n) */
-public class MinimumProduct {
-    public static int solve(int N, int M, int[] Arr) {
-        int ans = Integer.MAX_VALUE;
-        // Iterate over all possible starting points for the subsequence
-        for (int i = 0; i <= N - M; i++) {
-            int firstElement = Arr[i];  // The first element of the subsequence
-            int lastElement = Arr[i + M - 1];   // The last element of the subsequence
-            int product = firstElement * lastElement;
-            ans = Math.min(ans, product);
-        }
-        return ans;
-    }
-}
 
 /************************************************************************************************************************/
 PS- Seat reservation
@@ -81,29 +67,6 @@ public class SeatReservationSystem {
 }
 
 
-/* CODE */
-public class Solution {
-    public static List<Integer> solution(int N, int K, int[] seats) {
-        Set<Integer> reservedSeats = new HashSet<>();
-        List<Integer> ans = new ArrayList<>();
-        for (int ops : seats) {
-            if (ops == 0) { // Fetch the smallest unreserved seat
-                for (int seat = 1; seat <= N; seat++) {
-                    if (!reservedSeats.contains(seat)) {
-                        reservedSeats.add(seat);
-                        ans.add(seat);
-                        break;
-                    }
-                }
-            } else { // Cancel reservation for seat `ops`
-                reservedSeats.remove(ops);
-            }
-        }
-
-        return ans;
-    }
-}
-
 
 /*********************************************************************************************************************************************/
 PS- The coin problem
@@ -141,30 +104,7 @@ public class Main {
 }
 
 
-/* CODE */
-public class Main {
-    static final int M = (int) 1e9 + 7;
-    static long solve(long n, long k, long m) {
-        long[][] prev = new long[(int) k + 1][(int) m + 1];
-        long[][] curr = new long[(int) k + 1][(int) m + 1]
-        prev[0][0] = 1;
-        prev[1][0] = 1;
-        curr[0][0] = 1;
-        for (long i = 1; i <= n - 1; ++i) {
-            for (long j = 1; j <= k; ++j) {
-                for (long p = 0; p < m; ++p) {
-                    curr[(int) j][(int) p] = prev[(int) j][(int) p];
-                    curr[(int) j][(int) p] += prev[(int) (j - 1)][(int) ((p - i + m) % m)];
-                    curr[(int) j][(int) p] %= M;
-                }
-            }
-            prev = curr;
-        }
-        return prev[(int) k][0];
-    }
-}
-
-/* CODE */
+/* CODE CAN BE WRONG */
 public class Main {
     static final int M = (int) 1e9 + 7;
     static int solve(int n, int k, int m) {
