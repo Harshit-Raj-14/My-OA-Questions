@@ -23,3 +23,63 @@ https://medium.com/paypal-tech/scaling-kafka-to-support-paypals-data-growth-a0b4
 https://tech.phonepe.com/the-kafka-edge-managing-100-billion-daily-events-at-phonepe/
 https://www.confluent.io/events/kafka-summit-americas-2021/how-did-we-move-the-mountain-migrating-1-trillion-messages-per-day-across/
 https://blog.bytebytego.com/p/cloudflares-trillion-message-kafka
+
+
+Top Tricky Java questions
+
+
+1. Why Java is not 100% Object-oriented
+2. Why pointers are not used in Java
+3. What is JIT compiler in Java
+4. Why String is immutable in java
+5. What is a marker interface
+
+6. Can you override a private or static method in Java
+7. Does “finally” always execute in Java
+8. How Can You Make a Class Immutable
+9. What is singleton class in Java and how can we make a class singleton?
+10. How to break a Singleton pattern
+
+11. Does Java support multiple inheritances
+12. Can you access a non-static variable in the static context
+13. is it possible to load a class by two ClassLoader
+14. Can you explain how “Inheritance” and “Composition” are different
+15. What is the best candidate for the HashMap Key
+
+16. Can we use a default constructor of a class even if an explicit constructor is defined
+17. If two threads have same priority which thread will be executed first
+18. Can we serialize static variables in java
+19. What is a deadlock in Java, and how can you create one programmatically
+20. Will the ‘finally’ block execute if you put the return statement or System. exit () on the ‘try‘ or ‘catch‘ block?
+
+
+
+
+explain your framework to me. 🫠 👇
+
+We are using a maven Project to manage all dependencies which our project requires and using testNg as framework. Along with testNg framework we are using Data Driven Approach using TestNg @DataProvider annotation so we can run our tests multiple times with different Data.
+
+Folder 1 (src/test/java) 📁
+We have src/test/java folder where we have one package named testcases and we are maintaining all our test case files (java files). Ex : LoginTest.java
+We are using @Test Annotation for tests.
+
+Folder 2 (src/test/resources) 📁
+Inside src/test/resources we have one package with name utilities where we maintained our data.properties file containing url and username and password data. Our excel files are also present inside this utilities package.
+
+Folder 3 (src/main/resources) 📁
+
+👉 In this folder we have one package named pageobjects where we stored all our locators for each webpage of our application.
+
+👉 In this folder we have one package with name baseTest inside this we have our base.java file from where we invoke our browsers, we are using the concept of ThreadLocal class for thread safety so we can run tests in parallel, also we are extending this base class in every tests. Also we are loading our properties file inside base class. Also we are using @BeforeSuite (for launching browsers ) and @AfterSuite (for closing browser)
+
+👉 In this Folder we have the listener
+package too, inside that we have Listeners.java class that implements ITestListener interface so we can control flow of execution like taking screenshots for failed test case and attaching them with extent reports.
+
+extent reports we are using. We kept extent.properties file in src/test/resources folder 📁 
+
+testng.xml: This file we have maintained to run multiple tests also this file is properly configured in our pom.xml file so we can easily run our testng.xml from maven command. Note : Memorize how testng.xml file looks sometimes interviewer can ask you to write sample testng.xml file on notepad.
+
+Our Project is configured in jenkins we have provided our pom.xml path in jenkins and using mvn clean test command to run our test cases.
+
+github: we are maintaining all code in github. 🧑‍💻
+
