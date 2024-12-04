@@ -45,6 +45,17 @@ ORDER BY mth, product_id;
 📍 How do you handle NULL values in SQL? Provide an example query.
 
 
+𝗛𝗼𝘄 𝘁𝗼 𝗠𝗮𝗸𝗲 𝗬𝗼𝘂𝗿 𝗦𝗤𝗟 𝗤𝘂𝗲𝗿𝗶𝗲𝘀 𝗥𝘂𝗻 𝗟𝗶𝗸𝗲 𝗮 𝗟𝗶𝘁𝘁𝗹𝗲 𝗜𝗺𝗽𝗮𝗹𝗮 🦌
+
+Sometimes, developers forget the easy and simple things that make SQL queries so much faster.
+
+• A͟v͟o͟i͟d͟ ͟S͟E͟L͟E͟C͟T͟ ͟* always list the columns you need.
+• S͟k͟i͟p͟ ͟c͟u͟r͟s͟o͟r͟s͟ ͟a͟n͟d͟ ͟s͟u͟b͟q͟u͟e͟r͟i͟e͟s͟ ͟w͟h͟e͟n͟ ͟p͟o͟s͟s͟i͟b͟l͟e JOINs are faster and cleaner.
+• U͟s͟e͟ ͟i͟n͟d͟e͟x͟e͟s to speed up WHERE, JOIN, and ORDER BY operations.
+• Run E͟X͟P͟L͟A͟I͟N͟ ͟A͟N͟A͟L͟Y͟Z͟E to see what’s slowing things down.
+• Test queries on r͟e͟a͟l͟ ͟d͟a͟t͟a to ensure they work as expected.
+
+https://www.linkedin.com/posts/gon-lukov_sql-postgres-mysql-activity-7267437915155107840-nWcF?utm_source=share&utm_medium=member_desktop
 
 
 SQL Interview Questions with Answers in data analyst interviews 🎯
@@ -78,3 +89,5 @@ SELECT o.CustomerID, SUM(oi.Quantity) AS TotalQuantity FROM Orders o JOIN OrderI
 ✅ Write a SQL query to find the earliest order date for each customer from a table Orders (OrderID, CustomerID, OrderDate).
 
 SELECT CustomerID, MIN(OrderDate) AS EarliestOrderDate" FROM Orders GROUP BY CustomerID;
+
+
