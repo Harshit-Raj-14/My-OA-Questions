@@ -1,0 +1,32 @@
+NVIDIA Interview Experience
+
+Interview (Single Round):
+Interviewer has shared proper Hackerrank link of the questions as e.g course scheduling, linked list cycle detection.
+Coding Questions:
+Check if a given number N is a perfect square.
+What is a segmentation fault?
+Check if N is a power of 2.
+Align a given memory address to 4.
+Reverse the bits of a number (e.g., 4 = 100, reversed = 001, new number = 1).
+
+Core C++ Concepts:
+What is a stack?
+What is a stack pointer?
+How to move the stack pointer up or down (shared pseudocode).
+What is a static variable in OOP?
+Can we use the static keyword without a class?
+Again, I answered all questions confidently.
+
+Operating Systems:
+What is an OS?
+Difference between system software, BIOS, and firmware.
+How to implement firmware in C.
+What are semaphores? Write code for a counting semaphore.
+
+Projects:
+Discussed my recent minor project, tech stack, and the reasons behind the project choice.
+HR Questions:
+
+What do you know about NVIDIA?
+Why is NVIDIA excelling in AI?
+Name a few products by NVIDIA.
