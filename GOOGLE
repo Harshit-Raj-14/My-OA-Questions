@@ -1,3 +1,15 @@
+/*******************************************************************************************/
+You are given two Array of integers A and B.
+You want to find the total number of times Array A occurs as a subarray in B + Array B occurs as a subarray in A.
+How will you solve this and what would be the time complexity of your solution?
+
+ANS-
+1.If size of both arrays are equal and arrays are equal then ans is 2 and if arrays are not equal then ans is 0
+2.If size of both arrays are not equal then one is bigger and one is shorter and shorter one can occur as subarray in bigger array.For checking this we can use KMP algorithm which works in O(n) or we can use Hashing algorithm
+
+/************************************************************************************************/
+
+
 💻 During Interview:
 - After reading problem statement, ask your interviewer about handling:
  1. Negatives
