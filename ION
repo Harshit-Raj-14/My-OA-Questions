@@ -1,0 +1,31 @@
+Round 1: Online Assessment
+The initial round consisted of 20-22 MCQs (I don’t recall the exact number), covering:
+Basic Aptitude questions
+Basic DSA concepts
+The questions were quite straightforward and manageable with practice.
+Round 2: Virtual Interview
+The interview was scheduled for the next day. Since it was my first interview, I was understandably nervous. To prepare, I sought advice from seniors who suggested focusing on puzzles and DSA problems.
+ A helpful resource I used: https://lnkd.in/g8R-b6Zf
+Here’s how the interview unfolded:
+1️⃣ Introductions – The panel started by introducing themselves, followed by asking for my introduction.
+
+2️⃣ Puzzle Questions:
+Hourglass Puzzle: Using a 4-minute and 7-minute hourglass, measure 9 minutes.
+ 🟢 I solved this as I had practiced it earlier.
+https://lnkd.in/gsjj345U
+Three People and a Bike Puzzle:
+ Three people (A, B, C) need to travel 300 km with one bike. At most two can ride the bike, which moves at 60 km/h, while walking speed is 15 km/h. Calculate the minimum time for all to reach the destination.
+ 🔴 I initially gave an incorrect approach but later revised my solution.
+
+3️⃣ DSA Question:
+Find the maximum product of three elements in an array (which may include negative numbers).
+ 🟢 I started with the brute force approach and then optimized my solution.
+
+4️⃣ OOPs and DS Questions:
+What is OOPs, and what are its 4 pillars?
+Difference between encapsulation and regular functions in C?
+Types of inheritance?
+How would you design Snake and Ladder? Follow-up: What if the snake's bite vanishes after the first encounter?
+Difference between unordered_map and ordered_map and their time complexities?
+How would you design a leaderboard?
+Time complexity of priority queue?
