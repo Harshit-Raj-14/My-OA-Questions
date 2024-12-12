@@ -54,6 +54,42 @@ Top Tricky Java questions
 
 
 
+Java Interview Questions:
+1. What is Exception?
+2. Types of Exceptions?
+3. Examples of checked and unchecked exceptions with proper explanations.
+4. What is the parent class of Exception?
+5. Is there an ultimate parent class of Throwable?
+6. try-catch-finally block—when does finally not execute?
+7. Default size of HashMap and its fill ratio?
+8. Internal implementation of HashMap in Java?
+9. Stream API questions: map and filter concepts.
+
+Design Pattern Questions: 
+1. SOLID Principles 
+2. Factory Design
+
+Some more about core java and JDBC as well.
+
+Theoretical questions were followed by practical code snippets to evaluate how well I understood core concepts:
+
+🔹 String SCP (String Constant Pool): Exploring immutability and how strings are stored in the SCP.
+🔹 Dynamic Dispatch: Parent class reference holding a child class object, with overriding methods.
+🔹 Best Matching Object Pattern: Overloaded methods with a parent and child class object, determining which method gets called when passing null.
+
+Spring Boot Interview Questions:
+1. Spring vs. Spring Boot: Why the shift towards Spring Boot?
+2. RestController vs. Controller—differences and use cases.
+3. A situation-based question: Which controller is most suitable?
+4. Spring MVC properties names.
+5. ORM tools: Hibernate and JPA.
+6. How to call third-party APIs in Spring Boot?
+7. Stereotype annotations in Spring Boot.
+8. About Spring boot starters 
+9. Spring profile annotation
+and some more...
+
+
 
 explain your framework to me. 🫠 👇
 
