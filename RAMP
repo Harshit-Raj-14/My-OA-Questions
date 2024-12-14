@@ -1,0 +1,433 @@
+JAVASCRIPT CHALLENGE
+
+Instructions
+
+Your task is to implement a simple cloud storage system. All operations that should be supported are listed below.
+
+Solving this task consists of several levels. Subsequent levels are opened when the current level is correctly solved. You always have access to the data for the current and all previous levels.
+
+You can execute a single test case by running the following command in the terminal: bash run_single_test.sh "<test_case_name>".
+Requirements
+
+Your task is to implement a simple cloud storage system that maps objects (files) to their metainformation. Specifically, the storage system should maintain files along with some information about them (name, size, etc.). Note that this system should be in-memory, you do not need to work with the real filesystem.
+
+Plan your design according to the level specifications below:
+
+    Level 1: The cloud storage system should support adding new files, retrieving, and copying files.
+    Level 2: The cloud storage system should support finding files by matching prefixes and suffixes.
+    Level 3: The cloud storage system should support adding users with various capacity limits.
+    Level 4: The cloud storage system should support compressing and decompressing files.
+
+/***********************************************************************************************************************************************************/
+Level 1
+
+The cloud storage system should support operations to add files, copy files, and get files stored on the system.
+
+    addFile(name, size) — should add a new file name to the storage. size is the amount of memory required in bytes. The current operation fails if a file with the same name already exists. Returns true if the file was added successfully or false otherwise.
+
+    copyFile(nameFrom, nameTo) — should copy the file at nameFrom to nameTo. The operation fails if nameFrom points to a file that does not exist or points to a directory. The operation fails if the specified file already exists at nameTo. Returns true if the file was copied successfully or false otherwise.
+
+    getFileSize(name) — should return the size of the file name if it exists, or null otherwise.
+
+Examples
+
+The example below shows how these operations should work (the section is scrollable to the right):
+Queries	Explanations
+
+addFile("/dir1/dir2/file.txt", 10)
+copyFile("/not-existing.file", "/dir1/file.txt")
+copyFile("/dir1/dir2/file.txt", "/dir1/file.txt")
+addFile("/dir1/file.txt", 15)
+copyFile("/dir1/file.txt", "/dir1/dir2/file.txt")
+getFileSize("/dir1/file.txt")
+getFileSize("/not-existing.file")
+
+	
+
+returns true; adds file "/dir1/dir2/file.txt" of 10 bytes
+returns false; the file "/not-existing.file" does not exist
+returns true; adds file "/dir1/file.txt" of 10 bytes
+returns false; the file "/dir1/file.txt" exists already
+returns false; the file "/dir1/dir2/file.txt" exists already
+returns 10
+returns null; the file "/not-existing.file" does not exist
+
+Editable file - cloudstorage.js
+const CloudStorageInterface = require('./cloudStorageInterface');
+
+class CloudStorage extends CloudStorageInterface {
+  constructor() {
+    super();
+    // TODO: implement
+  }
+
+  // TODO: implement interface methods here
+}
+module.exports = CloudStorage;
+
+/* CODE */
+
+
+/***********************************************************************************************************************************************************/
+Level 2
+
+Implement support for retrieving file names by searching directories via prefixes and suffixes.
+
+findFile(prefix, suffix) — should search for files with names starting with prefix and ending with suffix. Returns a list of strings representing all matching files in this format: ["<name1>(<size1>)", "<name2>(<size2>)", ...]. The output should be sorted in descending order of file sizes or, in the case of ties, lexicographically. If no files match the required properties, should return an empty list.
+
+Examples
+
+The example below shows how these operations should work (the section is scrollable to the right):
+Queries	Explanations
+
+addFile("/root/dir/another_dir/file.mp3", 10)
+addFile("/root/file.mp3", 5)
+addFile("/root/music/file.mp3", 7)
+copyFile("/root/music/file.mp3", "/root/dir/file.mp3")
+findFile("/root", ".mp3")
+findFile("/root", "file.txt")
+findFile("/dir", "file.mp3")
+
+	
+
+returns true
+returns true
+returns true
+returns true
+returns ["/root/dir/another_dir/file.mp3(10)", "/root/dir/file.mp3(7)", "/root/music/file.mp3(7)", "/root/file.mp3(5)"]
+returns []; there is no file with the prefix "/root" and suffix "file.txt"
+returns []; there is no file with the prefix "/dir" and suffix "file.mp3"
+
+/* CODE */
+
+
+/***********************************************************************************************************************************************************/
+Level 3
+
+Implement support for different users sending queries to the system. All users share a common filesystem in the cloud storage, but each user is assigned an individual storage capacity limit.
+
+    addUser(userId, capacity) — should add a new user to the system, with capacity as their storage limit in bytes. The total size of all files owned by userId cannot exceed capacity. The operation fails if a user with userId already exists. Returns true if a user with userId is successfully created, or false otherwise.
+
+    addFileBy(userId, name, size) — should behave in the same way as the addFile from Level 1, but the added file should be owned by the user with userId. A new file cannot be added to the storage if doing so will exceed the user's capacity limit. Returns the remaining storage capacity for userId if the file is successfully added or null otherwise.
+
+Note that all queries calling the addFile operation implemented during Level 1 are run by the user with userId = "admin", who has unlimited storage capacity. Also, assume that the copyFile operation preserves the ownership of the original file.
+
+    updateCapacity(userId, capacity) — should change the maximum storage capacity for the user with userId. If the total size of all user's files exceeds the new capacity, the largest files (sorted lexicographically in case of a tie) should be removed from the storage until the total size of all remaining files will no longer exceed the new capacity. Returns the number of removed files, or null if a user with userId does not exist.
+
+Examples
+
+The example below shows how these operations should work (the section is scrollable to the right):
+Queries	Explanations
+
+addUser("user1", 125)
+addUser("user1", 100)
+addUser("user2", 100)
+addFileBy("user1", "/dir/file.big", 50)
+addFileBy("user1", "/file.med", 30)
+addFileBy("user2", "/file.med", 40)
+copyFile("/file.med", "/dir/another/file.med")
+copyFile("/file.med", "/dir/another/another/file.med")
+addFileBy("user1", "/dir/file.small", 10)
+addFile("/dir/admin_file", 200)
+addFileBy("user1", "/dir/file.small", 5)
+addFileBy("user1", "/my_folder/file.huge", 100)
+addFileBy("user3", "/my_folder/file.huge", 100)
+updateCapacity("user1", 300)
+updateCapacity("user1", 50)
+
+
+updateCapacity("user2", 1000)
+
+	
+
+returns true; creates user "user1" with 125 bytes capacity
+returns false; "user1" already exists
+returns true; creates user "user2" with 100 bytes capacity
+returns 75
+returns 45
+returns null; file named "/file.med" already exists and owned by "user1"
+returns true; copying preserves the file owner. After copying, "user1" has 15 capacity left
+returns false; "user1" does not have enough storage capacity left to perform copying operation
+returns 5
+returns true; this operation is done by "admin" with unlimited capacity
+returns null; the file "/dir/file.small" already exists
+returns null; "user1" does not have enough storage capacity left to add this file
+returns null; "user3" doesn't exist
+returns 0; all files owned by "user1" can fit into the new capacity of 300 bytes
+returns 2; the files "/dir/file.big" and "/dir/another/file.med"
+             should be deleted so the remaining files owned by "user1"
+             can fit into the new capacity of 50 bytes
+returns null; "user2" doesn't exist
+
+
+/* CODE */
+
+
+/***********************************************************************************************************************************************************/
+Level 4
+
+Implement support for file compression.
+
+    compressFile(userId, name) — should compress the file name if it belongs to userId. The compressed file should be replaced with a new file named <name>.COMPRESSED. The size of the newly created file should be equal to the half of the original file. The size of all files is guaranteed to be even, so there should be no fractional calculations. It is also guaranteed that name for this operation never points to a compressed file - i.e., it never ends with .COMPRESSED. Compressed files should be owned by userId — the owner of the original file. Returns the remaining storage capacity for userId if the file was compressed successfully or null otherwise.
+
+Note that because file names can only contain lowercase letters, compressed files cannot be added via addFile.
+It is guaranteed that all copyFile operations will preserve the suffix .COMPRESSED.
+
+    decompressFile(userId, name) — should revert the compression of the file name if it belongs to userId. It is guaranteed that name for this operation always ends with .COMPRESSED. If decompression results in the userId exceeding their storage capacity limit or a decompressed version of the file with the given name already exists, the operation fails. Returns the remaining capacity of userId if the file was decompressed successfully or null otherwise.
+
+Examples
+
+The example below shows how these operations should work (the section is scrollable to the right):
+Queries	Explanations
+
+addUser("user1", 1000)
+addUser("user2", 5000)
+addFileBy("user1", "/dir/file.mp4", 500)
+compressFile("user2", "/dir/file.mp4")
+compressFile("user3", "/dir/file.mp4")
+compressFile("user1", "/folder/non_existing_file")
+compressFile("user1", "/dir/file.mp4")
+getFileSize("/dir/file.mp4.COMPRESSED")
+getFileSize("/dir/file.mp4")
+copyFile("/dir/file.mp4.COMPRESSED", "/file.mp4.COMPRESSED")
+addFileBy("user1", "/dir/file.mp4", 500)
+decompressFile("user1", "/dir/file.mp4.COMPRESSED")
+updateCapacity("user1", 2000)
+decompressFile("user2", "/dir/file.mp4.COMPRESSED")
+decompressFile("user3", "/dir/file.mp4.COMPRESSED")
+decompressFile("user1", "/dir/file.mp4.COMPRESSED")
+decompressFile("user1", "/file.mp4.COMPRESSED")
+
+	
+
+returns true
+returns true
+returns 500
+returns null; the file "/dir/file.mp4" is owned by "user1"
+returns null; "user3" doesn't exist
+returns null; the file "/folder/non_existing_file" doesn't exist
+returns 750; the file "/dir/file.mp4" is compressed to size = 500 / 2 = 250 bytes
+returns 250
+returns null
+returns true
+returns 0
+returns null; "user1" does not have enough storage capacity to decompress the file
+returns 0
+returns null; the file "/dir/file.mp4.COMPRESSED" is owned by "user1"
+returns null; "user3" doesn't exist
+returns null; the file "/dir/file.mp4" exists already
+returns 750
+
+/* CODE */
+const CloudStorageInterface = require('./cloudStorageInterface');
+
+class CloudStorage extends CloudStorageInterface {
+  constructor() {
+    super();
+    this.files = {}; // Store files as a map of file paths to their sizes
+    this.users = { admin: { capacity: Infinity, used: 0, files: {} } }; // Users with their storage info
+  }
+
+  /**
+   * Adds a new file to the storage.
+   * @param {string} name - The name (path) of the file.
+   * @param {number} size - The size of the file in bytes.
+   * @returns {boolean} - True if the file was added successfully, false otherwise.
+   */
+  addFile(name, size) {
+    if (this.files.hasOwnProperty(name)) {
+      return false; // File already exists
+    }
+    this.files[name] = size;
+    return true;
+  }
+
+  /**
+   * Copies a file from one location to another.
+   * @param {string} nameFrom - The path of the file to copy.
+   * @param {string} nameTo - The destination path of the copied file.
+   * @returns {boolean} - True if the file was copied successfully, false otherwise.
+   */
+  copyFile(nameFrom, nameTo) {
+    if (!this.files.hasOwnProperty(nameFrom) || this.files.hasOwnProperty(nameTo)) {
+      return false; // Source file doesn't exist or destination file already exists
+    }
+
+    // Determine the owner of the source file
+    let owner = null;
+    for (const [userId, user] of Object.entries(this.users)) {
+      if (user.files[nameFrom]) {
+        owner = userId;
+        break;
+      }
+    }
+
+    if (!owner || owner === 'admin') {
+      // Admin files or files without ownership can be copied freely
+      this.files[nameTo] = this.files[nameFrom];
+      return true;
+    }
+
+    const user = this.users[owner];
+    const fileSize = this.files[nameFrom];
+
+    if (user.used + fileSize > user.capacity) {
+      return false; // Insufficient capacity for the owner
+    }
+
+    // Copy file and adjust ownership
+    this.files[nameTo] = fileSize;
+    user.files[nameTo] = fileSize;
+    user.used += fileSize;
+    return true;
+  }
+
+  /**
+   * Retrieves the size of a file.
+   * @param {string} name - The name (path) of the file.
+   * @returns {number|null} - The size of the file if it exists, null otherwise.
+   */
+  getFileSize(name) {
+    return this.files.hasOwnProperty(name) ? this.files[name] : null;
+  }
+
+  /**
+   * Finds files by matching prefix and suffix.
+   * @param {string} prefix - The prefix to match.
+   * @param {string} suffix - The suffix to match.
+   * @returns {string[]} - A list of matching files in the format "<name>(<size>)", sorted by size (descending) and lexicographically for ties.
+   */
+  findFile(prefix, suffix) {
+    const matches = Object.entries(this.files)
+      .filter(([name, size]) => name.startsWith(prefix) && name.endsWith(suffix))
+      .map(([name, size]) => `${name}(${size})`);
+
+    return matches.sort((a, b) => {
+      const sizeA = parseInt(a.match(/\((\d+)\)$/)[1]);
+      const sizeB = parseInt(b.match(/\((\d+)\)$/)[1]);
+      if (sizeA !== sizeB) return sizeB - sizeA; // Sort by size (descending)
+      return a.localeCompare(b); // Lexicographical order for ties
+    });
+  }
+
+  /**
+   * Adds a new user with a specific capacity.
+   * @param {string} userId - The ID of the user.
+   * @param {number} capacity - The storage capacity for the user.
+   * @returns {boolean} - True if the user was added successfully, false otherwise.
+   */
+  addUser(userId, capacity) {
+    if (this.users[userId]) {
+      return false; // User already exists
+    }
+    this.users[userId] = { capacity, used: 0, files: {} };
+    return true;
+  }
+
+  /**
+   * Adds a file owned by a specific user.
+   * @param {string} userId - The ID of the user.
+   * @param {string} name - The name (path) of the file.
+   * @param {number} size - The size of the file in bytes.
+   * @returns {number|null} - Remaining storage capacity for the user, or null if operation fails.
+   */
+  addFileBy(userId, name, size) {
+    const user = this.users[userId];
+    if (!user || this.files.hasOwnProperty(name) || user.used + size > user.capacity) {
+      return null; // User doesn't exist, file already exists, or capacity exceeded
+    }
+    this.files[name] = size;
+    user.files[name] = size;
+    user.used += size;
+    return user.capacity - user.used;
+  }
+
+  /**
+   * Updates the storage capacity for a specific user.
+   * @param {string} userId - The ID of the user.
+   * @param {number} capacity - The new storage capacity for the user.
+   * @returns {number|null} - Number of files removed to fit the new capacity, or null if user does not exist.
+   */
+  updateCapacity(userId, capacity) {
+    const user = this.users[userId];
+    if (!user) {
+      return null; // User doesn't exist
+    }
+    user.capacity = capacity;
+    const files = Object.entries(user.files)
+      .sort(([nameA, sizeA], [nameB, sizeB]) => sizeB - sizeA || nameA.localeCompare(nameB));
+
+    let removedFiles = 0;
+    for (const [name, size] of files) {
+      if (user.used <= capacity) break;
+      delete this.files[name];
+      delete user.files[name];
+      user.used -= size;
+      removedFiles++;
+    }
+    return removedFiles;
+  }
+
+  /**
+   * Compresses a file owned by a specific user.
+   * @param {string} userId - The ID of the user.
+   * @param {string} name - The name (path) of the file to compress.
+   * @returns {number|null} - Remaining storage capacity for the user if successful, or null otherwise.
+   */
+  compressFile(userId, name) {
+    const user = this.users[userId];
+    const compressedName = `${name}.COMPRESSED`;
+    if (!user || !user.files[name] || name.endsWith('.COMPRESSED') || this.files[compressedName]) {
+      return null; // User doesn't exist, file not owned by user, file already compressed, or compressed file exists
+    }
+
+    const originalSize = this.files[name];
+    const compressedSize = originalSize / 2;
+
+    // Replace the file with its compressed version
+    delete this.files[name];
+    delete user.files[name];
+    user.used -= originalSize;
+
+    this.files[compressedName] = compressedSize;
+    user.files[compressedName] = compressedSize;
+    user.used += compressedSize;
+
+    return user.capacity - user.used;
+  }
+
+  /**
+   * Decompresses a file owned by a specific user.
+   * @param {string} userId - The ID of the user.
+   * @param {string} name - The name (path) of the file to decompress.
+   * @returns {number|null} - Remaining storage capacity for the user if successful, or null otherwise.
+   */
+  decompressFile(userId, name) {
+    const user = this.users[userId];
+    const originalName = name.replace('.COMPRESSED', '');
+    if (!user || !user.files[name] || !name.endsWith('.COMPRESSED') || this.files[originalName]) {
+      return null; // User doesn't exist, file not owned by user, file not compressed, or original file already exists
+    }
+
+    const compressedSize = this.files[name];
+    const originalSize = compressedSize * 2;
+
+    if (user.used + originalSize - compressedSize > user.capacity) {
+      return null; // Not enough capacity to decompress
+    }
+
+    // Replace the compressed file with its decompressed version
+    delete this.files[name];
+    delete user.files[name];
+    user.used -= compressedSize;
+
+    this.files[originalName] = originalSize;
+    user.files[originalName] = originalSize;
+    user.used += originalSize;
+
+    return user.capacity - user.used;
+  }
+}
+
+module.exports = CloudStorage;
+
