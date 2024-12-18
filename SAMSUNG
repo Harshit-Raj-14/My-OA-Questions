@@ -1,0 +1,23 @@
+OA
+Problem: From an integer array, choose a contiguous window ‘W1’ from left or right; the result is negative sum of ‘W1’ + positive sum of remaining elements. Maximize the result.
+Solution: Kadane’s algorithm - running max.
+- Passed all visible test case in 1.5 hrs
+- Spent the next 1 hr optimizing my code.
+- In the last 15 min, the invigilator confirmed that hidden test cases also passed.
+- Finally, I took breath of relief.
+
+2️⃣ Virtual Tech Interview:
+- Taken by a Senior Engineer who asked a flood-fill based Medium problem. 
+- Asked me to describe my SWC test problem and code its solution. 
+- Later learned that Samsung does this to weed out folks who cheated in their SWC test.
+
+If you solve LC 200. Number of Islands, you can solve this too.
+
+
+3️⃣ Hiring Manager Interview
+- Asked about my past projects at Amazon.
+- Asked “Check if two linked lists are Intersecting”.
+- Followed up with “Find the intersection point”. 
+- Gave just the O(m + n) time complexity solutions.
+
+If you solve LC 160. Intersection of Two LLs, you can solve both parts here.
