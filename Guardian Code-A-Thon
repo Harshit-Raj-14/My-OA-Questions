@@ -1,0 +1,61 @@
+PS- SELL GOLD
+
+You have N ornaments made of gold placed in a row. You have been given an array of N positive integers representing the base price of each ornament. Each day, you can choose to sell either the leftmost or the rightmost gold ornament. 
+If you sell an ornament on the Kth day, its price becomes K lines ils base price. Your task is to find and return an integer value representing the maximum amount you can earn by selling all of These gold ornaments.
+
+Example 1:
+input: 5, (2,4.6,2,5)
+
+Output: 64
+Explanation:
+Here the optimal way to sell the omaments is in following order.
+• On Day 1, we sell the leftmost omament (with a base price of 2), and its effective price is 12 2.
+• On Day 2 we sell the rightmost ornament (with a base price of 5), and its effective price is 25 = 10.
+• On Day 3, we sell the rightmost omanent (with a base price of 2), and its effective price is 3*2=6б,
+• On Day 4, we sell the leftmost omament (with a base price of 4), and its effective price is 4416.
+• On Day 5, we sell the remaining ornament (with a base price of 6), and its effective price is 5630.
+The total amount obtained is 2+10+6+16+30=64. Hence, 64 is returned as the output.
+
+/* CODE */
+public int sellGold(int n, int[] arr){
+  Integer dp[][] = new Integer[n][n];
+  return solve(arr, 0, arr.length-1, 1, dp);
+}
+public int solve (int arr[], int i, int j, int k, Integer dp[][]){
+  if(i>j) return 0;
+  if(dp[i][j]!=null) return dp[i][j];
+  int left = arr[i]*k + solve(arr, i+1, j, k+1, dp);
+  int right = arr[j]*k + solve(arr, i, j-1, k+1, dp);
+  return dp[i][j]=Math.max(left, right);
+}
+
+
+/***********************************************************************************************************************************/
+Gym Timing
+John has recently joined the gym and his trainer has provided him with a schedule for N days. He needs to perform a workout for specific minutes each day given in an integer array T. 
+However, his trainer has allowed him to skip a maximum of K consecutive days. and take rest
+Your task is to help John find and return an integer value representing the minimum minutes he needs to work out in the gym considering he can take a maximum of K consecutive days off.
+
+input: 7, 2, [10,15,8,12,18,20,25]
+Output: 26
+
+/* CODE */
+
+public int minMinutes(int n, int arr[], int k){
+  Integer dp[][] new Integer[n+100][k+100];
+  return solve(arr, 0, k, k, dp);
+}
+
+public static int solve(int arr[], int i, int k, int o, Integer dp[][]){  //o is orignal k time 
+  if(i>=arr.length) return 0;
+  if(dp[i][k]!=null) return dp[i][k];
+  int not_take = Integer.MAX_VALUE;
+  if(k>0) not_take = solve(arr, i+1, k-1, o, dp);
+  int take = arr[i] + solve(arr, i+1, o, o, dp);  //k resets to origina time (o)
+  return dp[i][k]=Math.min(take, not_take);
+}
+
+
+
+
+
