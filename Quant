@@ -1,0 +1,19 @@
+A field. 100 murderers. One bullet. 
+'You are guarding 100 murderers in a field with a single bullet. If any murderer has a non-zero probability of surviving, he will attempt to escape. 
+If a murderer is certain of death, he won't try. How do you stop them from escaping?'
+
+🧠 Most Candidates:
+• Start calculating probabilities
+• Try to determine optimal shooting strategy
+• Consider game theory matrices
+• Get lost in the mathematical weeds
+
+💡 What Elite Candidates See:
+The elegant solution requires zero calculations:
+Don't shoot anyone. Simply announce you'll shoot randomly if anyone tries to escape. Since no one can have certainty of survival (the key constraint), and they only attempt escape with non-zero survival probability, no one will risk it.
+
+This Question Tests:
+• Can you spot critical information in a sea of distractions?
+• Do you default to complexity or seek elegant solutions?
+• Can you explain complex logic simply?
+• Do you understand human behavior beyond the numbers?
