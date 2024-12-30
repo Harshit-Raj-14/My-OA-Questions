@@ -1,0 +1,23 @@
+Android interview experience, this is for entry level (intern-level)
+
+The interview started with introductions, and then we went scratching the tech stacks - compose or XML, later we have discussions over both 🙂
+
+1. What are the 4 different android components (Activity, Services, Broadcast receiver and Content Providers)
+2. Tell me more about Services, where it can be used - Work manager, Alarm Manager, Jobs
+3. Tell me more about broadcast receivers, how we receive an intent to open another app
+4. Tell me about what Content providers do?
+5. Lifecycle of composable?
+6. Tell me some approach where you can break the app without blocking the main thread.
+7. What are viewmodels? 
+8. What is flow and how's its different from Live data?
+
+Then the XML & Views
+1. what are the different layouts ? 
+2. Which layout is best according to you ?
+3. How to implement a stacking UI (multiple images stacking over each other but should not overlap only 30%)
+4. What is fragments? 
+5. Why fragments is different from Activities?
+6. Lifecycle of fragments.
+7. If I rotate the device what lifecycle components called in the fragment ?
+8. And a bit about coroutines
+
