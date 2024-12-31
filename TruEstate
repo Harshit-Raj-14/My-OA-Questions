@@ -1,0 +1,69 @@
+Q1
+In a country in which people only want boys, every family continues to have children until they have a boy. 
+If they have a girl, they have another child. If they have a boy, they stop. What is the proportion of boys to girls in the country?
+
+SOLUTION:
+The probability that a child will be born male on any given day is always 1/2. So, if there are n1 babies born on day 1, then n1/2 are expected to be male, similarly for day 2 there will be n2/2
+males and so forth. Adding up all the males born after an arbitrary period of time:
+
+Total males born=n1/2+n2/2+n3/2+⋯=(n1+n2+n3+⋯)/2=(Total babies born)/2
+
+which means half will be male and half will be female.
+
+Proportion of male to female babies1:1
+
+The actions of the parents do not change this probability and therefore do not change the daily expected proportion of males and females born.
+
+/*******************************************************************************************************************************************************/
+Q2
+Probability of accidents on a road in one hour is 3/4. What is the probability of accidents in half hour?
+
+SOLUTION:
+Hint:The probability of no event in two disjoint intervals of half hours is same as probability of no event in one full hour.
+
+Probability of no accident in 1 hour = (prob of no accident in 1/2 hour )*(no accidents in next disjoint 1/2 hour)=p^2
+hence 1/4=p^2, 
+hence p=1/2, 
+hence probability of accident in half hour=1/2
+
+
+/*********************************************************************************************************************************************/
+Q3
+In my drawer, there are 10 blue socks and 10 red socks. 
+Without looking, how many socks do I need to take from my drawer if I want to be sure to have a pair of the same color?
+
+SOLUTION:
+To ensure you have at least one pair of the same color socks, you need to consider the worst-case scenario. If you pick one sock of each color (one blue and one red), you won't have a pair yet.
+
+Therefore, to guarantee that you have a pair of the same color, you need to take out 3 socks. This way, no matter the combination, at least two of the socks will be of the same color.
+
+eg no matter how you pick : BRB, BBR, BBB, RRR SOME HOW OR OTHER YOU WILL HAVE ATLEAST TWO SOCKS OF SAME COLOR after 3 picks.
+
+
+/*********************************************************************************************************************************************/
+Q4
+Choose a random number between 0 and 1 and record its value. Keep doing it until the sum of the numbers exceeds 1.
+How many tries do we need?
+
+SOLUTION:
+ANSWER -> e
+
+
+
+/*********************************************************************************************************************************************/
+EEGG DROP PUZZLE - > 2 Eggs and 100 Floors
+
+https://www.geeksforgeeks.org/puzzle-set-35-2-eggs-and-100-floors/
+
+
+
+/*********************************************************************************************************************************************/
+Puzzle 20 | (5 Pirates and 100 Gold Coins)
+https://www.geeksforgeeks.org/puzzle-20-5-pirates-and-100-gold-coins/
+
+
+PRACTICE QUANT AND REASONING PUZZLES -> https://www.facebook.com/photo/?fbid=734774799878436&set=a.735083869847529
+(monty hall, invisible dice and many more...)
+
+
+
