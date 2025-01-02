@@ -1,0 +1,325 @@
+PROBLEM 1:
+
+var a = 10;
+function foo() {
+  var a;
+  console.log(a);
+  var a = 20;
+}
+foo();
+
+Output: undefined
+
+REASON : This behavior is due to JavaScript's variable hoisting within functions. 
+When the foo function is called, the JavaScript interpreter parses its body. 
+During this process, all variable declarations within the function are hoisted to the top of their scope.
+Inside the foo function, var a; is hoisted to the top of the function scope. 
+However, only the declaration is hoisted, not the initialization. 
+When console.log(a) is executed, the local variable a exists, but it hasn’t been initialized yet. 
+By default, uninitialized variables in JavaScript are assigned the value undefined. Thus, undefined is logged.
+
+/********************************************************************************************************************/
+PROBLEM 2:
+
+function makeFunctionArray() {
+  var arr = [];
+  for (var i = 0; i < 5; i++) {
+    arr.push(function() {
+      console.log(i);
+    });
+  }
+  return arr;
+}
+var functionArr = makeFunctionArray();
+functionArr[0](); // What will this log?
+functionArr[1](); // And this?
+
+Output: 
+5
+5
+
+REASON:
+This happens because of how closures and the var keyword work in JavaScript.
+1. var is function-scoped, not block-scoped:
+    The variable i declared in the for loop is not block-scoped. Instead, it is function-scoped, meaning there is only one shared i variable for all iterations of the loop.
+
+2. Closures capture references, not values:
+    When you create a function inside the loop with arr.push(function() { console.log(i); });, the function does not capture the current value of i. Instead, it captures a reference to the variable i.
+    By the time the loop finishes, i has been incremented to 5 (the termination condition of the for loop).
+
+3. All functions share the same i:
+    After the loop ends, i is 5. Therefore, when functionArr[0]() or functionArr[1]() is called, they both reference the same i, which now holds the value 5.
+
+Why Both Log 5:
+    When the for loop finishes, i is 5.
+    All the functions in arr reference the same i.
+    When you call functionArr[0]() or functionArr[1](), the current value of i (which is 5) is logged.
+
+How to Fix It (if you want 0, 1, 2, etc. to log):
+To log the value of i at each iteration, you can create a new scope for i. This can be done using let (block-scoped variable) or an IIFE (Immediately Invoked Function Expression).
+
+Use let (ES6+):
+function makeFunctionArray() {
+  var arr = [];
+  for (let i = 0; i < 5; i++) { // `let` creates a new block-scoped `i` for each iteration
+    arr.push(function() {
+      console.log(i);
+    });
+  }
+  return arr;
+}
+var functionArr = makeFunctionArray();
+functionArr[0](); // Logs 0
+functionArr[1](); // Logs 1
+
+
+/********************************************************************************************************************/
+PROBLEM 3:
+function getAge(...args) {
+  console.log(typeof args);
+}
+getAge(21);
+
+OUTPUT:
+object
+
+REASON:
+The ...args Syntax (Rest Parameters):
+    The ...args syntax is called a rest parameter in JavaScript. It allows you to collect all remaining arguments into an array-like object.
+    In this case, args will be an array containing all the arguments passed to the function. Here, since you pass 21, args will be [21].
+
+The typeof Operator:
+    The typeof operator in JavaScript returns the type of a variable or value.
+    For arrays in JavaScript, the typeof operator returns "object", because arrays are a special type of object.
+
+Execution:
+    When getAge(21) is called:
+        args becomes [21] (an array containing the single value 21).
+        typeof args evaluates to "object", because arrays are considered objects in JavaScript.
+
+/********************************************************************************************************************/
+PROBLEM 4:
+console.log('Start');
+
+setTimeout(function() {
+  console.log('Timeout');
+}, 0);
+
+Promise.resolve().then(function() {
+  console.log('Promise');
+});
+console.log('End');
+
+OUTPUT:
+Start
+End
+Promise
+Timeout
+
+REASON: JavaScript's event loop
+1. JavaScript Execution:
+JavaScript runs code in a single-threaded environment. It has two main components for handling tasks:
+    Call Stack: Handles synchronous tasks.
+    Task Queue & Microtask Queue: Handles asynchronous tasks.
+        The Microtask Queue (e.g., promises) has higher priority than the Task Queue (e.g., setTimeout callbacks).
+
+Step-by-Step Execution:
+    console.log('Start'):
+        This is a synchronous operation, so it gets executed immediately.
+        Output: Start.
+
+    setTimeout:
+        The setTimeout function schedules a callback to run after 0 milliseconds. However, its callback is placed in the Task Queue.
+        It will wait until the call stack is empty and all microtasks (promises) are completed.
+
+    Promise.resolve().then:
+        The then callback is a microtask, which is added to the Microtask Queue.
+        Microtasks are executed before tasks in the Task Queue.
+
+    console.log('End'):
+        This is another synchronous operation, so it gets executed immediately.
+        Output: End.
+
+    Microtask Queue Execution:
+        After the synchronous code is finished, the event loop checks the Microtask Queue.
+        The promise’s then callback is executed.
+        Output: Promise.
+
+    Task Queue Execution:
+        Finally, the event loop processes the Task Queue.
+        The setTimeout callback is executed.
+        Output: Timeout.
+
+Order of Execution:
+    Synchronous Code:
+        console.log('Start')
+        console.log('End')
+
+    Microtasks (Promises):
+        console.log('Promise')
+
+    Tasks (setTimeout):
+        console.log('Timeout')
+
+Key Takeaways:
+    Promises have higher priority than setTimeout in JavaScript's event loop.
+    Even with setTimeout set to 0ms, it is queued as a task and will only run after all synchronous and microtask code is complete.
+
+/********************************************************************************************************************************************/
+QUESTION:
+Write code to built the following structure:
+/*****************************************************/
+*  /*********************************************/    *
+*  /*                                           */    *
+*  /*                CAROUSEL                   */    *
+*  /*                                           */    *
+*  /*********************************************/    *
+ *                                                   *
+*  /********************************************/    *
+*  /*                                          */    *
+*  /*   [ ]          [ ]          [ ]          */    *
+*  /*                                          */    *
+*  /*   [ ]          [ ]          [ ]          */    *
+*  /*                                (help now)*/    *
+*  /********************************************/    *
+/*****************************************************/
+
+OUTPUT:
+A carousel at the top.
+A grid of six rectangular boxes below the carousel (likely for items or content).
+A circular button at the bottom-right labeled "HELP NOW."
+
+Logic Explanation:
+    Carousel:
+        A div with a class .carousel styled using CSS to make it a rectangle.
+        Flexbox is used to center the text inside the carousel.
+
+    Grid Layout:
+        A parent div with a class .grid uses CSS Grid Layout (grid-template-columns: repeat(3, 1fr);) to create a 3x2 grid.
+        Child elements .grid-item are styled as rectangular boxes.
+
+    Help Button:
+        A button styled with position: fixed to place it at the bottom-right of the viewport.
+        Rounded shape achieved using border-radius: 50%.
+
+    Responsiveness:
+        Widths are defined in percentages (like 80%) to make the layout responsive.
+        viewport meta tag ensures it looks good on mobile devices.
+
+
+/* CODE */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel and Grid in Rectangle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f8f9fa;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+
+    /* Outer Container */
+    .container {
+      width: 90%; /* Adjust width of the outer rectangle */
+      max-width: 1200px;
+      height: 90%; /* Adjust height of the outer rectangle */
+      border: 3px solid #007bff;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+      background-color: white;
+    }
+
+    /* Carousel Section */
+    .carousel {
+      width: 100%;
+      height: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Grid Section */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+      flex-grow: 1; /* Allows the grid to take up available space */
+    }
+
+    .grid-item {
+      background-color: #f0f0f0;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Help Button */
+    .help-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 80px;
+      height: 80px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .help-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Outer Container -->
+  <div class="container">
+    <!-- Carousel -->
+    <div class="carousel">
+      Carousel
+    </div>
+
+    <!-- Grid Section -->
+    <div class="grid">
+      <div class="grid-item">1</div>
+      <div class="grid-item">2</div>
+      <div class="grid-item">3</div>
+      <div class="grid-item">4</div>
+      <div class="grid-item">5</div>
+      <div class="grid-item">6</div>
+    </div>
+  </div>
+
+  <!-- Help Button -->
+  <button class="help-button">HELP NOW</button>
+
+</body>
+</html>
+
