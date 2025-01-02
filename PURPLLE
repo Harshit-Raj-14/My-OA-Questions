@@ -1,0 +1,159 @@
+CODING PROBLEM : MAXIMUM PRODUCT
+
+Given an array arr with n integers. Find the maximum subsequence product that can be formed from the elements of this array. 
+Moreover, any pair of index i and index j is present in the same subsequence if and only if their product i*j is a perfect square.
+Since the answer can be large, output the answer modulo 10^9 +7. Also the array is 1 indexed.
+
+/* CODE 1 PARTIALLY PASSED */
+public class MaxSubsequenceProduct {
+    static boolean[] ok = new boolean[200002];
+    static boolean[] sq = new boolean[200002];
+    public static long solve(int[] A) {
+        if (!ok[1]) { // Compute once for all test cases
+            Arrays.fill(ok, true);
+            sq[1] = true;
+            for (int i = 2; i * i <= 200001; i++) {
+                if (ok[i * i]) {
+                    sq[i * i] = true;
+                    for (int j = i * i; j <= 200001; j += i * i) {
+                        ok[j] = false; // This can't be a valid start
+                    }
+                }
+            }
+        }     
+        long odd = 0;  // Max product with at least one odd number of primes
+        long even = 1; // Max product with all perfect squares
+        // Iterate over the array elements (1-indexed logic)
+        for (int i = 0; i < A.length; i++) {
+            long cur = A[i];        
+            if (ok[i + 1]) { // Check if it's a valid index start
+                for (int j = 2; 1L * (i + 1) * j * j <= A.length; j++) {
+                    cur *= A[(i + 1) * j * j - 1];
+                }
+            }        
+            odd = Math.max(odd, cur);     
+            if (sq[i + 1]) { // Check if it's a perfect square
+                even *= A[i];
+            }
+        }
+        // Return the max product between odd and even cases, modulo 10^9 + 7
+        return Math.max(odd, even) % (1000000007);
+    }
+}
+
+/* CODE 2 */
+public class MaxSubsequenceProduct {   
+    static boolean[] ok = new boolean[200002];
+    static boolean[] sq = new boolean[200002];
+    public static long solve(int[] A) {
+        int n = A.length;
+        if (!ok[1]) { // Precompute once for all test cases
+            Arrays.fill(ok, true);
+            sq[1] = true;
+            for (int i = 2; i * i <= 200001; i++) {
+                if (ok[i * i]) {
+                    sq[i * i] = true;
+                    for (int j = i * i; j <= 200001; j += i * i) {
+                        ok[j] = false; // These indices can't be valid for the subsequence
+                    }
+                }
+            }
+        }    
+        long[] dp = new long[n]; // DP array to store maximum product at each index
+        Arrays.fill(dp, 1); // Initialize DP array with 1 (since we multiply elements)
+        // Iterate over all elements to compute the maximum subsequence product
+        for (int i = 0; i < n; i++) {
+            long cur = A[i];
+            // Look for valid indices j where i * j is a perfect square
+            for (int j = i + 1; j < n; j++) {
+                if (ok[i + 1] && ok[j + 1]) {
+                    // Multiply the current element and the valid subsequence product
+                    dp[j] = Math.max(dp[j], dp[i] * A[j]);
+                }
+            }
+        }
+        // Find the maximum product subsequence
+        long maxProduct = 0;
+        for (long product : dp) {
+            maxProduct = Math.max(maxProduct, product);
+        }
+
+        return maxProduct % (1000000007);
+    }
+}
+
+/*****************************************************************************************************************************************************************/
+PROBLEM 1
+Problem:
+Mike is having an examination on the basics of C. He is given a problem statement in the form of pseudocode, where he needs to print Google Cloud Cloud Google. 
+There is one line missing in the given pseudocode. Which of the following options should be inserted in place of the missing line to get the desired output?
+Code:
+
+#include <stdio.h>
+void fun1(char *s1, char *s2) {
+    char *tmp;
+    tmp = s1;
+    s1 = s2;
+    s2 = tmp;
+}
+
+void fun2(char **s1, char **s2) {
+    char *tmp;
+    // Missing line
+    *s2 = *s1;
+    *s1 = tmp;
+}
+
+int main() {
+    char *str1 = "Google", *str2 = "Cloud";
+    fun1(str1, str2); 
+    printf("%s %s\n", str1, str2); // Output: Google Cloud
+    fun2(&str1, &str2); 
+    printf("%s %s\n", str1, str2); // Output: Cloud Google
+
+    return 0;
+}
+
+Correct Answer:
+Option 1: tmp = *s2; should be inserted to correctly swap the values of str1 and str2.
+Explanation:
+    fun1 swaps the values of s1 and s2, but since it's passed by value, it doesn't affect the original strings in main().
+    fun2 receives pointers by reference and swaps the strings using the tmp pointer. The missing line should store the value of *s2 in tmp, allowing the proper swap to happen.
+
+
+/******************************************************************************************************************************************/
+PROBLEM 2
+#include<iostream>
+using namespace std;
+
+class Check1 {
+    int var;
+public:
+    void display() { }
+};
+
+class Check2 {
+    int var;
+public:
+    virtual void display() { }
+};
+
+int main(void) {
+    int n1 = sizeof(Check1);
+    int n2 = sizeof(Check2);
+    return 0;
+}
+
+
+SOLUTION:
+OUTPUT:
+n1=4
+n2=16 (n2 value can vary)
+
+Check1 Class (Size: 4 bytes)
+    Class Check1 contains a single int member. In most systems, an int occupies 4 bytes.
+    Hence, sizeof(Check1) returns 4 bytes as the size.
+
+Check2 Class (Size: 16 bytes)
+    Class Check2 contains a single int member and a virtual function.
+    For a class with virtual functions, a vtable (virtual table) pointer is added to the class to enable dynamic dispatch. This vtable pointer typically takes 4 or 8 bytes, depending on the architecture.
